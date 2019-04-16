@@ -5,6 +5,7 @@ const ATTR_COLOR_LOC = 1;
 
 class Scene {
     _primitives = [];
+    _points = [];
 
     constructor(canvasID) {
         this.canvas = document.getElementById(canvasID);
@@ -80,9 +81,6 @@ class Scene {
             return res;
         };
 
-        //...................................................
-        //Setters - Getters
-
         gl.fSetSize = function (w, h) {
             this.canvas.style.width = w + 'px';
             this.canvas.style.height = h + 'px';
@@ -124,6 +122,11 @@ class Scene {
             .setCameraMatrix(this.gCamera.viewMatrix)
             .renderModal(primitive.gModal.preRender());
         }
+        for (let point of this._points) {
+            point.gShader.activate()
+            .setCameraMatrix(this.gCamera.viewMatrix)
+            .renderModal(point.gModal.preRender());
+        }
     };
 
     addPrimitive(structure) {
@@ -131,6 +134,17 @@ class Scene {
         this._primitives.push(prim);
 
         return prim;
+    }
+
+    addPoint(vec, color) {
+        this._points.push(new Point(this.gl, this.gCamera, vec, color));
+    }
+}
+
+class Point {
+    constructor(gl, camera, vec, color) {
+        this.gShader = new PrimitiveShader(gl, camera.projectionMatrix);
+        this.gModal = Primatives.Point.createModal(gl, 'point', vec.toArray(), color.toArray());
     }
 }
 
@@ -166,7 +180,6 @@ class Primitive {
         for (let i = 0; i < this.structure.getNumChains(); i++) {
             this.structure.getChain(i).setEmbeddedTargetMode(index !== i);
             if (index !== i) {
-                console.log(this.structure.getChain(i).getEffectorLocation());
                 this.structure.getChain(i).updateEmbeddedTarget(this.structure.getChain(i).getEffectorLocation());
             }
         }

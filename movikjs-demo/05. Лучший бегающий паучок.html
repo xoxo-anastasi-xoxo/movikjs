@@ -58,17 +58,11 @@
         );
 
         lap.addConsecutiveBone(defaultBoneDirection, defaultBoneLength, boneColour);
-        lap.setRotorBaseboneConstraint(MovikJS.BaseboneConstraintType3D.LOCAL_ROTOR, vec, 10);
+        lap.setRotorBaseboneConstraint(MovikJS.BaseboneConstraintType3D.GLOBAL_ROTOR, vec, 15);
 
         const joint2 = new FabrikJoint3D();
 
-        joint2.setAsBallJoint(30);
-
-        // if (Math.abs(angle) > 90) {
-        //     joint2.setHingeJoint(MovikJS.JointType.LOCAL_HINGE, vec.cross(defaultBoneDirection), 0, 25, defaultBoneDirection);
-        // } else {
-        //     joint2.setHingeJoint(MovikJS.JointType.LOCAL_HINGE, vec.cross(defaultBoneDirection), 25, 0, defaultBoneDirection);
-        // }
+        joint2.setAsBallJoint(90);
 
         lap.getChain()[1].setJoint(joint2);
 
@@ -79,14 +73,14 @@
     const st = new MovikJS.FabrikStructure3D();
     st.addChain(body);
 
-    st.connectChain(getLap(1, 35), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(2, -35), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(3, 70), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(4, -70), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(5, 105), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(6, -105), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(7, 140), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(8, -140), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(1, 45), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(2, 135), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(3, 15), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(4, 165), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(5, -45), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(6, -135), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(7, -15), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(8, -165), 0, 0, MovikJS.BoneConnectionPoint.START, true);
 
 </script>
 <script>
@@ -102,26 +96,25 @@
     const dist = 0.05;
     const initLegPos = [];
     let prev0 = primitive.effectors[0]._chain[primitive.effectors[0]._chain.length - 1].getEndLocation();
-    primitive.moveTo(0, new Vec3f(prev0));
 
     for(let curLeg = 0; curLeg < 8; ++curLeg) {
-        const leg = primitive.effectors[curLeg + 1]._chain;
+        let leg = primitive.effectors[curLeg + 1]._chain;
         initLegPos.push(Vec3f.clone(leg[leg.length - 1].getEndLocation()));
+        // scene.addPoint(initLegPos[curLeg], Utils.MAGENTA);
         Vec3f.subtract(initLegPos[curLeg], prev0);
     }
+    primitive.moveTo(0, new Vec3f(prev0));
 
     const spiderMove = () => {
         const currentChain = (count) % 8 + 1;
         let prev0 = primitive.effectors[0]._chain[primitive.effectors[0]._chain.length - 1].getEndLocation();
         let prev = Vec3f.clone(prev0);
         Vec3f.add(prev, initLegPos[currentChain - 1]);
-        //console.log(prev);
         if (up) {
-            //console.log('+', currentChain);
             primitive.moveTo(currentChain, new Vec3f(prev.x + dir * dist / 2, prev.y + dist * 2, prev.z));
             up = false;
         } else {
-            //console.log('-', currentChain);
+            // scene.addPoint(new Vec3f(prev.x + dir * dist / 2, prev.y, prev.z), Utils.MAGENTA);
             primitive.moveTo(currentChain, new Vec3f(prev.x + dir * dist / 2, prev.y, prev.z));
             count++;
             if (prev.x + dir * dist / 2 > 1) {
@@ -134,7 +127,7 @@
         }
     };
 
-    // setInterval(spiderMove, 50);
+    setInterval(spiderMove, 25);
 </script>
 </body>
 </html>

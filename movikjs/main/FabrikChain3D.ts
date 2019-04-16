@@ -794,6 +794,8 @@ export class FabrikChain3D {
                 thisBone.setEndLocation(target);
 
                 let thisBoneOuterToInnerUV = thisBone.getDirectionUV().negated();
+                console.log('target', target);
+                console.log('thisBoneOuterToInnerUV', thisBoneOuterToInnerUV);
 
                 switch (thisBoneJointType) {
                     case JointType.BALL:

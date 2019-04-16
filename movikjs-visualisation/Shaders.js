@@ -208,6 +208,7 @@ class PrimitiveShader extends Shader {
 		out vec4 color;
 
 		void main(void) {
+			gl_PointSize = 4.0;
 			color = a_color;
 			gl_Position = uPMatrix * uCameraMatrix * uMVMatrix * vec4(a_position, 1.0); 
 		}`;

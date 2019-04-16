@@ -13,6 +13,19 @@ Primatives.Primitive = class {
     }
 };
 
+Primatives.Point = class {
+    static createModal(gl, name, verts, colors) {
+        return new Modal(Primatives.Point.createMesh(gl, name, verts, colors));
+    }
+
+    static createMesh(gl, name, verts, colors) {
+        let mesh = gl.fCreateMeshVAO(name, verts, colors, gl.POINTS);
+        mesh.noCulling = true;
+        mesh.doBlending = true;
+        return mesh;
+    }
+};
+
 Primatives.GridAxis = class {
     static createModal(gl, incAxis) {
         return new Modal(Primatives.GridAxis.createMesh(gl, incAxis));

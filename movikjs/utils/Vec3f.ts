@@ -625,4 +625,6 @@ export class Vec3f {
      * @return
      */
     static getDirectionUV(v1: Vec3f, v2: Vec3f): Vec3f { return v2.minus(v1).normalise(); }
+
+    toArray = (): number[] => [this.x, this.y, this.z];
 }
