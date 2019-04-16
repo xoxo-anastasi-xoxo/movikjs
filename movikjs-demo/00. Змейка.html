@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Змейка 2D</title>
+    <script src="../movikjs-build/movik.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    console.log('мау');
+    const {FabrikChain2D, FabrikBone2D, Vec2f} = MovikJS;
+
+    const chain = new FabrikChain2D();
+
+    const baseBone = new FabrikBone2D( new Vec2f(), new Vec2f(1.0, 0.0), 0.05);
+    console.log(baseBone);
+    chain.addBone(baseBone);
+
+    const boneLength = 0.05;
+    const defaultUV  = new Vec2f(1.0, 0.0);
+    const numBones = 12;
+    for (let loop = 0; loop < numBones; loop++) {
+        const rotatedUV = Vec2f.rotateDegs(defaultUV, loop * numBones);
+
+        chain.addConsecutiveConstrainedBone(rotatedUV, boneLength, 60.0, 60.0);
+    }
+
+    chain.setFixedBaseMode(false);
+</script>
+<canvas is="my-scene" id="scene"> </canvas>
+<script type="text/javascript">
+    const fragmentShaderSource =
+        'precision mediump float;\n\
+        uniform vec4 u_FragColor;\n\
+        void main() {\n\
+            gl_FragColor = u_FragColor;\n\
+        }';
+
+    const vertexShaderSource =
+        'attribute vec4 a_Position;\n\
+        uniform vec4 u_Translation;\
+        void main() {\n\
+          gl_Position = a_Position + u_Translation;\n\
+        }';
+    const canva = document.getElementById('scene');
+    const gl = canva.getContext('webgl');
+    
+
+    function createShader(type, source) {
+        // Создание шейдера
+        let shader = gl.createShader(type);
+
+        // Устанавливаем шейдеру его программный код
+        gl.shaderSource(shader, source);
+
+        // Компилируем шейдер
+        gl.compileShader(shader);
+
+        // В случае успешной компиляции возвращаем шейдер
+        let success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+        if (success) {
+            return shader;
+        }
+
+        // В случае ошибки - сообщаем о ней
+        console.log(gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+    }
+    function createProgram(vertexShader, fragmentShader) {
+        // Создаем программую
+        let program = gl.createProgram();
+
+        // Закрепляем за ней шейдеры.
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+
+        // Указываем, что именно это программу надо выполнять в текущем графическом контексте.
+        gl.linkProgram(program);
+
+        // В случае успеха линковки - вернуть программу.
+        let success = gl.getProgramParameter(program, gl.LINK_STATUS);
+        if (success) {
+            return program;
+        }
+
+        // В случае ошибки - вывести информацию о ней.
+        console.log(gl.getProgramInfoLog(program));
+        gl.deleteProgram(program);
+    }
+    function resize() {
+        // получаем размер HTML-элемента canvas
+        let displayWidth = canva.clientWidth;
+        let displayHeight = canva.clientHeight;
+
+        // проверяем, отличается ли размер canvas
+        if (canva.width !== displayWidth ||
+            canva.height !== displayHeight) {
+
+            // подгоняем размер буфера отрисовки под размер HTML-элемента
+            canva.width = displayWidth;
+            canva.height = displayHeight;
+        }
+    }
+
+    // Компилируем шейдеры.
+    const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+    const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
+    // Создаем шейдерную программу.
+    const program = createProgram(vertexShader, fragmentShader);
+
+    // Подготовим пространство для отрисовки
+    gl.enable(gl.CULL_FACE); // разрешим отрисовку только лицевых треугольников
+    gl.enable(gl.DEPTH_TEST); // включим проверку z-индекса
+
+    function drawScene() {
+        resize(gl.canvas);
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+        // Указываем, какую программу использовать.
+        gl.useProgram(program);
+
+        const a_Position = gl.getAttribLocation(program, 'a_Position');
+        const u_FragColor = gl.getUniformLocation(program, 'u_FragColor');
+        const u_Translation = gl.getUniformLocation(program, 'u_Translation');
+
+        const verts = [];
+        chain._chain.forEach((bone) => {
+            verts.push(bone._startLocation.x, bone._startLocation.y);
+        });
+        verts.push(chain._chain[chain._chain.length - 1]._endLocation.x, chain._chain[chain._chain.length - 1]._endLocation.y);
+        const vertices = new Float32Array(verts);
+
+        // Создать буферный объект
+        const vertexBuffer = gl.createBuffer();
+        // Определить тип буферного объекта
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        // Записать данные в буферный объект
+        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+        // Сохранить ссылку на буферный объект в переменной a_Position
+        gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
+        // Разрешить присваивание переменной a_Position
+        gl.enableVertexAttribArray(a_Position);
+
+        gl.uniform4f(u_FragColor, 0, 0, 1, 1);
+        gl.uniform4f(u_Translation, 0, 0, 0, 0);
+
+        gl.clearColor(0, 0, 0, .1);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        gl.drawArrays(gl.LINE_STRIP, 0, chain._chain.length + 1);
+    }
+
+    drawScene();
+
+
+    let isDragging = false;
+    const moveHandler = (e) => {
+        if (!isDragging) {
+            return;
+        }
+        const h = window.innerHeight;
+        const w = window.innerWidth;
+
+        const x = e.clientX;
+        const y = e.clientY;
+
+        const targetX = (x - (w/2)) / (w/2);
+        const targetY = -(y - (h/2)) / (h/2);
+        chain.solveForTarget_(targetX, targetY);
+
+        drawScene();
+    };
+
+    window.addEventListener('click', (e) => {isDragging = !isDragging; moveHandler(e)});
+    window.addEventListener('mousemove', moveHandler);
+
+</script>
+</body>
+</html>

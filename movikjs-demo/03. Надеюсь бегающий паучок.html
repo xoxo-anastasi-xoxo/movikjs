@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Надеюсь бегающий паучок</title>
+    <script src="../movikjs-build/movik.js"></script>
+    <script src="../movikjs-visualisation/Shaders.js"></script>
+    <script src="../movikjs-visualisation/Scene.js"></script>
+    <script src="../movikjs-visualisation/RenderLoop.js"></script>
+    <script src="../movikjs-visualisation/Transform.js"></script>
+    <script src="../movikjs-visualisation/Camera.js"></script>
+    <script src="../movikjs-visualisation/Primatives.js"></script>
+    <script src="../movikjs-visualisation/Modal.js"></script>
+    <style>
+        html,body{margin:0; padding:0; width:100%; height:100%;}
+        body{background-color:#404040;}
+
+        canvas{border:1px solid black; position:relative; }
+        div{display:flex; width:100%; height:100%; align-items:center; justify-content:center;}
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="scene"></canvas>
+</div>
+<script>
+    const {Vec3f, FabrikBone3D, Utils, FabrikChain3D, FabrikJoint3D} = MovikJS;
+
+    const defaultStartLocation = new Vec3f(0, 0.2, 0);
+    const defaultBoneDirection   = new Vec3f(Vec3f.Y_AXIS).negated();
+    const defaultBoneLength      = 0.2;
+    let boneColour = Utils.GREY;
+
+    // Тело
+    const body = new FabrikChain3D('Тело');
+    body.addBone(
+        new FabrikBone3D(
+            defaultStartLocation,
+            Vec3f.X_AXIS,
+            1e-3,
+            boneColour,
+        )
+    );
+
+    body.setFixedBaseMode(false);
+
+    function getLap(index, angle) {
+        const lap = new FabrikChain3D(index + ' лапка');
+        const vec = Vec3f.rotateYDegs(Vec3f.Z_AXIS, angle);
+
+        lap.addBone(
+            new FabrikBone3D(
+                defaultStartLocation,
+                vec,
+                defaultBoneLength,
+                boneColour,
+            )
+        );
+
+        lap.addConsecutiveBone(defaultBoneDirection, defaultBoneLength, boneColour);
+        lap.setRotorBaseboneConstraint(MovikJS.BaseboneConstraintType3D.LOCAL_ROTOR, vec, 10);
+
+        const joint2 = new FabrikJoint3D();
+
+        if (Math.abs(angle) > 90) {
+            joint2.setHingeJoint(MovikJS.JointType.LOCAL_HINGE, vec.cross(defaultBoneDirection), 0, 15, defaultBoneDirection);
+        } else {
+            joint2.setHingeJoint(MovikJS.JointType.LOCAL_HINGE, vec.cross(defaultBoneDirection), 15, 0, defaultBoneDirection);
+        }
+        lap.getChain()[1].setJoint(joint2);
+
+        return lap;
+    }
+
+    // Соединяфкаем:3
+    const st = new MovikJS.FabrikStructure3D();
+    st.addChain(body);
+
+    st.connectChain(getLap(1, 35), 0, 0, MovikJS.BoneConnectionPoint.START);
+    st.connectChain(getLap(2, -35), 0, 0, MovikJS.BoneConnectionPoint.START);
+    st.connectChain(getLap(3, 70), 0, 0, MovikJS.BoneConnectionPoint.START);
+    st.connectChain(getLap(4, -70), 0, 0, MovikJS.BoneConnectionPoint.START);
+    st.connectChain(getLap(5, 105), 0, 0, MovikJS.BoneConnectionPoint.START);
+    st.connectChain(getLap(6, -105), 0, 0, MovikJS.BoneConnectionPoint.START);
+    st.connectChain(getLap(7, 140), 0, 0, MovikJS.BoneConnectionPoint.START);
+    st.connectChain(getLap(8, -140), 0, 0, MovikJS.BoneConnectionPoint.START);
+
+</script>
+<script>
+    const scene = new Scene('scene');
+    scene.init();
+
+    const primitive = scene.addPrimitive(st);
+
+    let count = 1;
+    let dir = 1;
+    const dist = 0.05;
+
+    setInterval(
+        () => {
+            const currentChain = (count) % 9;
+            let prev = primitive.effectors[currentChain]._chain[primitive.effectors[currentChain]._chain.length-1].getEndLocation();
+            primitive.moveTo(currentChain, new Vec3f(prev.x + dir * dist, prev.y, prev.z));
+            count++;
+            if (prev.x + dir * dist > 1) {
+                dir = -1;
+            } else if (prev.x + dir * dist < -1) {
+                dir = 1;
+            }
+        }, 50);
+</script>
+</body>
+</html>
