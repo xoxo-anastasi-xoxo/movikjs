@@ -58,11 +58,11 @@
         );
 
         lap.addConsecutiveBone(defaultBoneDirection, defaultBoneLength, boneColour);
-        lap.setRotorBaseboneConstraint(MovikJS.BaseboneConstraintType3D.GLOBAL_ROTOR, vec, 15);
+        lap.setRotorBaseboneConstraint(MovikJS.BaseboneConstraintType3D.GLOBAL_ROTOR, vec, 20);
 
         const joint2 = new FabrikJoint3D();
 
-        joint2.setAsBallJoint(90);
+        joint2.setAsBallJoint(100);
 
         lap.getChain()[1].setJoint(joint2);
 
@@ -73,14 +73,14 @@
     const st = new MovikJS.FabrikStructure3D();
     st.addChain(body);
 
-    st.connectChain(getLap(1, 45), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(2, 135), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(3, 15), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(4, 165), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(5, -45), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(6, -135), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(7, -15), 0, 0, MovikJS.BoneConnectionPoint.START, true);
-    st.connectChain(getLap(8, -165), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(1, 60), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(2, 120), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(3, 30), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(4, 150), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(5, -60), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(6, -120), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(7, -30), 0, 0, MovikJS.BoneConnectionPoint.START, true);
+    st.connectChain(getLap(8, -150), 0, 0, MovikJS.BoneConnectionPoint.START, true);
 
 </script>
 <script>
@@ -93,7 +93,7 @@
     let up = true;
     let count = 1;
     let dir = 1;
-    const dist = 0.05;
+    const dist = 0.1;
     const initLegPos = [];
     let prev0 = primitive.effectors[0]._chain[primitive.effectors[0]._chain.length - 1].getEndLocation();
 
@@ -111,7 +111,7 @@
         let prev = Vec3f.clone(prev0);
         Vec3f.add(prev, initLegPos[currentChain - 1]);
         if (up) {
-            primitive.moveTo(currentChain, new Vec3f(prev.x + dir * dist / 2, prev.y + dist * 2, prev.z));
+            primitive.moveTo(currentChain, new Vec3f(prev.x + dir * dist / 2, prev.y + dist, prev.z));
             up = false;
         } else {
             // scene.addPoint(new Vec3f(prev.x + dir * dist / 2, prev.y, prev.z), Utils.MAGENTA);
@@ -127,7 +127,7 @@
         }
     };
 
-    setInterval(spiderMove, 25);
+    setInterval(spiderMove, 70);
 </script>
 </body>
 </html>
