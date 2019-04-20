@@ -2,6 +2,9 @@ import {Vec3f} from '../utils/Vec3f';
 import {Mat4f} from '../utils/Mat4f';
 import {Utils} from '../utils/Utils';
 
+/**
+ * Положение в пространстве сцены.
+ */
 export class Transform {
     position: Vec3f;
     scale: Vec3f;

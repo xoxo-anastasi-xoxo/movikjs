@@ -346,4 +346,6 @@ export class Vec2f {
         return new Vec2f(source.x * cosTheta - source.y * sinTheta,  // x
             source.x * sinTheta + source.y * cosTheta); // y
     }
+
+    toArray = (): number[] => [this.x, this.y];
 }

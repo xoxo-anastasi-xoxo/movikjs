@@ -1,5 +1,8 @@
 import {ATTR_COLOR_LOC, ATTR_COLOR_NAME, ATTR_POSITION_LOC, ATTR_POSITION_NAME} from './Scene';
 
+/**
+ * Шейдер.
+ */
 class Shader {
     program;
     gl;
@@ -68,6 +71,9 @@ class Shader {
     }
 }
 
+/**
+ * Вспомогательные методы для работы с шейдерами.
+ */
 class ShaderUtil {
     static createShader(gl, src, type) {
         let shader = gl.createShader(type);
@@ -145,6 +151,9 @@ class ShaderUtil {
     }
 }
 
+/**
+ * Шейдер грида.
+ */
 export class GridAxisShader extends Shader {
     constructor(gl, pMatrix) {
         const vertSrc = '#version 300 es\n' +
@@ -176,10 +185,13 @@ export class GridAxisShader extends Shader {
     }
 }
 
-export class Primitive3DShader extends Shader {
+/**
+ * Шейдер для точки и скелета.
+ */
+export class Primitive2DShader extends Shader {
     constructor(gl, pMatrix) {
         const vertSrc = `#version 300 es
-		in vec3 a_position;	//Standard position data.
+		in vec3 a_position;
 		in vec4 a_color;
 
 		uniform mat4 uPMatrix;

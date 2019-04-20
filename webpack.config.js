@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './movikjs/index.ts',
+    entry: './src/index.ts',
 
     module: {
         rules: [

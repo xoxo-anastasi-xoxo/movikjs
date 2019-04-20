@@ -1,7 +1,11 @@
 import {Mat4f} from '../utils/Mat4f';
 import {Utils} from '../utils/Utils';
 import {Transform} from './Transform';
+import {DIMENSION} from "./Scene";
 
+/**
+ * Камера в сцене.
+ */
 export class Camera {
     projectionMatrix;
     transform;
@@ -47,7 +51,9 @@ export class Camera {
     }
 }
 
-
+/**
+ * Меняет положение камеры в ответ на действия пользователя.
+ */
 export class CameraController {
     canvas;
     camera;
@@ -67,26 +73,25 @@ export class CameraController {
         this.canvas = gl.canvas;
         this.camera = camera;
 
-        // this.rotateRate = -300;
-        // this.panRate = 5;
-        // this.zoomRate = 200;
-
         this.offsetX = box.left;
         this.offsetY = box.top;
 
-        this.onUpHandler = function () {
-            oThis.onMouseUp();
-        };		
-        this.onMoveHandler = function (e) {
-            oThis.onMouseMove(e);
-        };
+        if (DIMENSION !== 2) {
+            this.onUpHandler = function () {
+                oThis.onMouseUp();
+            };
+            this.onMoveHandler = function (e) {
+                oThis.onMouseMove(e);
+            };
 
-        this.canvas.addEventListener('mousedown', function (e) {
-            oThis.onMouseDown(e);
-        });		
-        this.canvas.addEventListener('mousewheel', function (e) {
-            oThis.onMouseWheel(e);
-        });	
+            this.canvas.addEventListener('mousedown', function (e) {
+                oThis.onMouseDown(e);
+            });
+            this.canvas.addEventListener('mousewheel', function (e) {
+                oThis.onMouseWheel(e);
+            });
+        }
+
     }
     
     onMouseDown(e) {

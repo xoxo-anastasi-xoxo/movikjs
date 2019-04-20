@@ -283,4 +283,9 @@ export class Mat3f {
      */
     toArray = (): number[] => [this.m00, this.m01, this.m02, this.m10, this.m11, this.m12, this.m20, this.m21, this.m22];
 
+    static identity() {
+        let a = new Float32Array(9);
+        a[0] = a[4] = a[8]  = 1;
+        return a;
+    }
 }

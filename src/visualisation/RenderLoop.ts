@@ -1,11 +1,11 @@
-/*
-NOTES:
-Tutorial on how to control FPS :: http://codetheory.in/controlling-the-frame-rate-with-requestanimationframe/
-
-EXAMPLE:
-rloop = new RenderLoop(function(dt){ 
-	console.log(rloop.fps + ' ' + dt);
-},10).start();
+/**
+ * Контролирует перерисовку сцены.
+ *
+ * Tutorial on how to control FPS :: http://codetheory.in/controlling-the-frame-rate-with-requestanimationframe/
+ * EXAMPLE:
+ * rloop = new RenderLoop(function(dt){
+ *     console.log(rloop.fps + ' ' + dt);
+ * },10).start();
 */
 
 export class RenderLoop {
@@ -18,21 +18,20 @@ export class RenderLoop {
 
     constructor(callback, fps) {
         let oThis = this;
-        this.msLastFrame = null;	//The time in Miliseconds of the last frame.
-        this.callBack = callback;	//What function to call for each frame
-        this.isActive = false;		//Control the On/Off state of the render loop
-        this.fps = 0;				//Save the value of how fast the loop is going.
+        this.msLastFrame = null;	// Время в миллисекундах последнего кадра.
+        this.callBack = callback;	// Какую функцию вызывать для каждого кадра.
+        this.isActive = false;		// Управление состоянием включения/выключения цикла рендеринга.
+        this.fps = 0;				// Хранит значение скорости цикла.
 
-        //if(!fps && fps > 0){ //Build a run method that limits the framerate
-        if (fps !== undefined && fps > 0) { //Build a run method that limits the framerate
-            this.msFpsLimit = 1000 / fps; //Calc how many milliseconds per frame in one second of time.
+        if (fps !== undefined && fps > 0) { // Создать метод run, который ограничивает частоту кадров.
+            this.msFpsLimit = 1000 / fps; // Считаем, сколько миллисекунд на кадр в одной секунде времени.
             this.run = function () {
-                //Calculate Deltatime between frames and the FPS currently.
+                // Вычислите Deltatime между кадрами и FPS в настоящее время.
                 let msCurrent = performance.now(),
                     msDelta = (msCurrent - oThis.msLastFrame),
-                    deltaTime = msDelta / 1000.0;		//What fraction of a single second is the delta time
+                    deltaTime = msDelta / 1000.0;		// Какую долю секунды составляет Deltatime.
 
-                if (msDelta >= oThis.msFpsLimit) { //Now execute frame since the time has elapsed.
+                if (msDelta >= oThis.msFpsLimit) { // Теперь выполним кадр как только истечет время.
                     oThis.fps = Math.floor(1 / deltaTime);
                     oThis.msLastFrame = msCurrent;
                     oThis.callBack(deltaTime);
@@ -40,14 +39,14 @@ export class RenderLoop {
 
                 if (oThis.isActive) window.requestAnimationFrame(oThis.run);
             };
-        } else { //Else build a run method thats optimised as much as possible.
+        } else { // В противном случае создайте метод run, который максимально оптимизирован.
             this.run = function () {
-                //Calculate Deltatime between frames and the FPS currently.
-                let msCurrent = performance.now(),	//Gives you the whole number of how many milliseconds since the dawn of time :)
-                    deltaTime = (msCurrent - oThis.msLastFrame) / 1000.0;	//ms between frames, Then / by 1 second to get the fraction of a second.
+                // Вычислите Deltatime между кадрами и FPS в настоящее время.
+                let msCurrent = performance.now(),
+                    deltaTime = (msCurrent - oThis.msLastFrame) / 1000.0;	// Какую долю секунды составляет Deltatime.
 
-                //Now execute frame since the time has elapsed.
-                oThis.fps = Math.floor(1 / deltaTime); //Time it took to generate one frame, divide 1 by that to get how many frames in one second.
+                // Теперь выполним кадр как только истечет время.
+                oThis.fps = Math.floor(1 / deltaTime); // Время, необходимое для создания одного кадра, разделите 1 на это, чтобы получить сколько кадров за одну секунду происходит.
                 oThis.msLastFrame = msCurrent;
 
                 oThis.callBack(deltaTime);

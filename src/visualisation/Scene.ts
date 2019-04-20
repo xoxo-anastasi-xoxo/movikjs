@@ -1,13 +1,17 @@
 import {Camera, CameraController} from './Camera';
 import {Primatives} from './Primatives'
-import {GridAxisShader, Primitive3DShader} from './Shaders';
+import {GridAxisShader, Primitive2DShader} from './Shaders';
 import {RenderLoop} from './RenderLoop';
 
 export const ATTR_POSITION_NAME = 'a_position';
 export const ATTR_POSITION_LOC = 0;
 export const ATTR_COLOR_NAME = 'a_color';
 export const ATTR_COLOR_LOC = 1;
+export let DIMENSION = 3;
 
+/**
+ * Сцена.
+ */
 export class Scene {
     canvas;
     gl;
@@ -19,7 +23,10 @@ export class Scene {
     _primitives = [];
     _points = [];
 
-    constructor(canvasID) {
+    constructor(canvasID, dimension) {
+        if (dimension === 2) {
+            DIMENSION = dimension;
+        }
         this.canvas = document.getElementById(canvasID);
         const gl = this.gl = this.canvas.getContext('webgl2');
 
@@ -108,15 +115,15 @@ export class Scene {
         };
     }
 
-    init() {
+    init(incAxis) {
         this.gl.fFitScreen(1, 1).fClear();
 
         this.gCamera = new Camera(this.gl);
-        this.gCamera.transform.position.set(0, 0.3, 3);
+        this.gCamera.transform.position.set(0, DIMENSION === 2 ? 0 : 0.3, 3);
         this.gCameraCtrl = new CameraController(this.gl, this.gCamera);
 
         this.gGridShader = new GridAxisShader(this.gl, this.gCamera.projectionMatrix);
-        this.gGridModal = Primatives.GridAxis.createModal(this.gl, true);
+        this.gGridModal = Primatives.GridAxis.createModal(this.gl, incAxis);
 
         this.RLoop = new RenderLoop(this.onRender, 30).start();
     }
@@ -153,16 +160,22 @@ export class Scene {
     }
 }
 
+/**
+ * Точка.
+ */
 class Point {
     gModal;
     gShader;
 
     constructor(gl, camera, vec, color) {
-        this.gShader = new Primitive3DShader(gl, camera.projectionMatrix);
+        this.gShader = new Primitive2DShader(gl, camera.projectionMatrix);
         this.gModal = Primatives.Point.createModal(gl, 'point', vec.toArray(), color.toArray());
     }
 }
 
+/**
+ * Скелет.
+ */
 class Primitive {
     structure;
     gl;
@@ -178,7 +191,7 @@ class Primitive {
         this.parseStructure();
         this.gl = gl;
 
-        this.gShader = new Primitive3DShader(gl, camera.projectionMatrix);
+        this.gShader = new Primitive2DShader(gl, camera.projectionMatrix);
         this.gModal = Primatives.Primitive.createModal(gl, this.name, this.verts, this.colors);
     }
 
@@ -194,7 +207,9 @@ class Primitive {
                 this.colors.push(...bone.getColour().toArray());
                 this.colors.push(...bone.getColour().toArray());
                 this.verts.push(...bone.getStartLocationAsArray());
+                if (DIMENSION === 2) this.verts.push(0);
                 this.verts.push(...bone.getEndLocationAsArray());
+                if (DIMENSION === 2) this.verts.push(0);
             }
             this.effectors.push(this.structure.getChain(i));
         }

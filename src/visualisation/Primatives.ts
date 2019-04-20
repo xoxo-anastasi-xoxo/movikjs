@@ -1,6 +1,9 @@
 import {Modal} from './Modal';
-import {ATTR_POSITION_LOC} from './Scene';
+import {ATTR_POSITION_LOC, DIMENSION} from './Scene';
 
+/**
+ * Объекты.
+ */
 export const Primatives: any = {};
 
 Primatives.Primitive = class {
@@ -36,53 +39,85 @@ Primatives.GridAxis = class {
 
     static createMesh(gl, incAxis) {
         let verts = [],
-            size = 2, div = 10.0, step = size / div, half = size / 2;
+            size = DIMENSION === 2 ? 7 : 2, div = DIMENSION === 2 ? 20 : 10, step = size / div, half = size / 2;
         let p;
-        for (let i = 0; i <= div; i++) {
-            p = -half + (i * step);
-            verts.push(p);
-            verts.push(0);
-            verts.push(half);
-            verts.push(0);
-            verts.push(p);
-            verts.push(0);
-            verts.push(-half);
-            verts.push(0);
-            p = half - (i * step);
-            verts.push(-half);
-            verts.push(0);
-            verts.push(p);
-            verts.push(0);
-            verts.push(half);
-            verts.push(0);
-            verts.push(p);
-            verts.push(0);
+        if (DIMENSION === 2) {
+            for (let i = 0; i <= div; i++) {
+                p = -half + (i * step);
+                verts.push(p);
+                verts.push(half);
+                verts.push(0);
+                verts.push(0);
+
+                verts.push(p);
+                verts.push(-half);
+                verts.push(0);
+                verts.push(0);
+
+                p = half - (i * step);
+
+                verts.push(-half);
+                verts.push(p);
+                verts.push(0);
+                verts.push(0);
+
+                verts.push(half);
+                verts.push(p);
+                verts.push(0);
+                verts.push(0);
+            }
+        } else {
+            for (let i = 0; i <= div; i++) {
+                p = -half + (i * step);
+                verts.push(p);
+                verts.push(0);
+                verts.push(half);
+                verts.push(0);
+                verts.push(p);
+                verts.push(0);
+                verts.push(-half);
+                verts.push(0);
+                p = half - (i * step);
+                verts.push(-half);
+                verts.push(0);
+                verts.push(p);
+                verts.push(0);
+                verts.push(half);
+                verts.push(0);
+                verts.push(p);
+                verts.push(0);
+            }
         }
 
         if (incAxis) {
-            verts.push(-1.1);
+            verts.push(-size/2);
             verts.push(0);
             verts.push(0);
             verts.push(1);
-            verts.push(1.1);
+
+            verts.push(size/2);
             verts.push(0);
             verts.push(0);
             verts.push(1);
+
             verts.push(0);
-            verts.push(-1.1);
-            verts.push(0);
-            verts.push(2);
-            verts.push(0);
-            verts.push(1.1);
+            verts.push(-size/2);
             verts.push(0);
             verts.push(2);
+
+            verts.push(0);
+            verts.push(size/2);
+            verts.push(0);
+            verts.push(2);
+
             verts.push(0);
             verts.push(0);
-            verts.push(-1.1);
+            verts.push(-size/2);
             verts.push(3);
+
             verts.push(0);
             verts.push(0);
-            verts.push(1.1);
+            verts.push(size/2);
             verts.push(3);
         }
 
