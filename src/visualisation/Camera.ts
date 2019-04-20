@@ -87,10 +87,11 @@ export class CameraController {
             this.canvas.addEventListener('mousedown', function (e) {
                 oThis.onMouseDown(e);
             });
+        }
+
             this.canvas.addEventListener('mousewheel', function (e) {
                 oThis.onMouseWheel(e);
             });
-        }
 
     }
     
@@ -119,7 +120,7 @@ export class CameraController {
             dy = y - this.prevY;
 
         
-        if (!e.shiftKey) {
+        if (!e.shiftKey || DIMENSION === 2) {
             this.camera.transform.rotation.y += dx * (this.rotateRate / this.canvas.width);
             this.camera.transform.rotation.x += dy * (this.rotateRate / this.canvas.height);
         } else {

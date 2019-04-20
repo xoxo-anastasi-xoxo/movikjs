@@ -115,15 +115,17 @@ export class Scene {
         };
     }
 
-    init(incAxis) {
+    init(incGrid, incAxis) {
         this.gl.fFitScreen(1, 1).fClear();
 
         this.gCamera = new Camera(this.gl);
         this.gCamera.transform.position.set(0, DIMENSION === 2 ? 0 : 0.3, 3);
         this.gCameraCtrl = new CameraController(this.gl, this.gCamera);
 
-        this.gGridShader = new GridAxisShader(this.gl, this.gCamera.projectionMatrix);
-        this.gGridModal = Primatives.GridAxis.createModal(this.gl, incAxis);
+        if (incGrid) {
+            this.gGridShader = new GridAxisShader(this.gl, this.gCamera.projectionMatrix);
+            this.gGridModal = Primatives.GridAxis.createModal(this.gl, incAxis);
+        }
 
         this.RLoop = new RenderLoop(this.onRender, 30).start();
     }
@@ -132,19 +134,21 @@ export class Scene {
         this.gCamera.updateViewMatrix();
         this.gl.fClear();
 
-        this.gGridShader.activate()
-        .setCameraMatrix(this.gCamera.viewMatrix)
-        .renderModal(this.gGridModal.preRender());
+        if (this.gGridShader) {
+            this.gGridShader.activate()
+                .setCameraMatrix(this.gCamera.viewMatrix)
+                .renderModal(this.gGridModal.preRender());
+        }
 
         for (let primitive of this._primitives) {
             primitive.gShader.activate()
-            .setCameraMatrix(this.gCamera.viewMatrix)
-            .renderModal(primitive.gModal.preRender());
+                .setCameraMatrix(this.gCamera.viewMatrix)
+                .renderModal(primitive.gModal.preRender());
         }
         for (let point of this._points) {
             point.gShader.activate()
-            .setCameraMatrix(this.gCamera.viewMatrix)
-            .renderModal(point.gModal.preRender());
+                .setCameraMatrix(this.gCamera.viewMatrix)
+                .renderModal(point.gModal.preRender());
         }
     };
 
