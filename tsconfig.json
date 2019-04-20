@@ -4,6 +4,6 @@
     "target": "es3"
   },
   "include": [
-    "movikjs/*"
+    "src/*"
   ]
 }

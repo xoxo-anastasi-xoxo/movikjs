@@ -1,5 +1,5 @@
 const path = require('path');
-console.log(path.resolve(__dirname, 'movikjs-build'));
+
 module.exports = {
     entry: './movikjs/index.ts',
 
@@ -18,7 +18,7 @@ module.exports = {
     output: {
         filename: 'movik.js',
         library: 'MovikJS',
-        path: path.resolve(__dirname, 'movikjs-build')
+        path: path.resolve(__dirname, 'build')
     },
 
 };
