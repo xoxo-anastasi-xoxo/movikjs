@@ -1,4 +1,7 @@
-let Primatives = {};
+import {Modal} from './Modal';
+import {ATTR_POSITION_LOC} from './Scene';
+
+export const Primatives: any = {};
 
 Primatives.Primitive = class {
     static createModal(gl, name, verts, colors) {
@@ -85,7 +88,7 @@ Primatives.GridAxis = class {
 
         let attrColorLoc = 4,
             strideLen,
-            mesh = {drawMode: gl.LINES, vao: gl.createVertexArray()};
+            mesh: any = {drawMode: gl.LINES, vao: gl.createVertexArray()};
 
         mesh.vertexComponentLen = 4;
         mesh.vertexCount = verts.length / mesh.vertexComponentLen;

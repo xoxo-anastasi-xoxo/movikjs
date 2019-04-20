@@ -18,13 +18,11 @@
 </head>
 <body>
 <script type="text/javascript">
-    console.log('мау');
     const {FabrikChain2D, FabrikBone2D, Vec2f} = MovikJS;
 
     const chain = new FabrikChain2D();
 
     const baseBone = new FabrikBone2D( new Vec2f(), new Vec2f(1.0, 0.0), 0.05);
-    console.log(baseBone);
     chain.addBone(baseBone);
 
     const boneLength = 0.05;

@@ -1,4 +1,12 @@
+import {Mat4f} from '../utils/Mat4f';
+import {Utils} from '../utils/Utils';
+import {Transform} from './Transform';
+
 export class Camera {
+    projectionMatrix;
+    transform;
+    viewMatrix;
+
     constructor(gl, fov = 45, near = 0.1, far = 100.0) {
         this.projectionMatrix = new Float32Array(16);
         const ratio = gl.canvas.width / gl.canvas.height;
@@ -41,24 +49,33 @@ export class Camera {
 
 
 export class CameraController {
+    canvas;
+    camera;
+    rotateRate= -300;
+    panRate = 5;
+    zoomRate = 200;
+    offsetX;
+    offsetY;
+    prevX = 0;
+    prevY = 0;
+    onUpHandler;
+    onMoveHandler;
+
     constructor(gl, camera) {
         const oThis = this;
         const box = gl.canvas.getBoundingClientRect();
         this.canvas = gl.canvas;
         this.camera = camera;
 
-        this.rotateRate = -300;
-        this.panRate = 5;
-        this.zoomRate = 200;
+        // this.rotateRate = -300;
+        // this.panRate = 5;
+        // this.zoomRate = 200;
 
         this.offsetX = box.left;
         this.offsetY = box.top;
 
-        this.prevX = 0;
-        this.prevY = 0;
-
-        this.onUpHandler = function (e) {
-            oThis.onMouseUp(e);
+        this.onUpHandler = function () {
+            oThis.onMouseUp();
         };		
         this.onMoveHandler = function (e) {
             oThis.onMouseMove(e);

@@ -1,9 +1,12 @@
 import {Camera, CameraController} from './Camera';
+import {Primatives} from './Primatives'
+import {GridAxisShader, PrimitiveShader} from './Shaders';
+import {RenderLoop} from './RenderLoop';
 
-const ATTR_POSITION_NAME = 'a_position';
-const ATTR_POSITION_LOC = 0;
-const ATTR_COLOR_NAME = 'a_color';
-const ATTR_COLOR_LOC = 1;
+export const ATTR_POSITION_NAME = 'a_position';
+export const ATTR_POSITION_LOC = 0;
+export const ATTR_COLOR_NAME = 'a_color';
+export const ATTR_COLOR_LOC = 1;
 
 export class Scene {
     canvas;

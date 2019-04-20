@@ -1,4 +1,17 @@
-class Transform {
+import {Vec3f} from '../utils/Vec3f';
+import {Mat4f} from '../utils/Mat4f';
+import {Utils} from '../utils/Utils';
+
+export class Transform {
+    position: Vec3f;
+    scale: Vec3f;
+    rotation: Vec3f;
+    matView: Mat4f;
+    matNormal: Float32Array;
+    forward: Float32Array;
+    up: Float32Array;
+    right: Float32Array;
+
     constructor() {
         this.position = new Vec3f(0, 0, 0);
         this.scale = new Vec3f(1, 1, 1);

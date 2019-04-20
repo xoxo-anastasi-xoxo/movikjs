@@ -1,13 +1,12 @@
 const path = require('path');
-console.log(path.resolve(__dirname, 'movikjs-build'))
+console.log(path.resolve(__dirname, 'movikjs-build'));
 module.exports = {
     entry: './movikjs/index.ts',
-    devtool: 'inline-source-map',
 
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.ts?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
             }

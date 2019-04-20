@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
     "module": "es6",
-    "target": "es3",
-    "sourceMap": true,
-    "allowJs": true
+    "target": "es3"
   },
   "include": [
     "movikjs/*"

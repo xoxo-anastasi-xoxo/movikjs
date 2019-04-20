@@ -1,8 +1,15 @@
-class Shader {
-    constructor(gl, vertShaderSrc, fragShaderSrc) {
-        this.program = ShaderUtil.createProgramFromText(gl, vertShaderSrc, fragShaderSrc, true);
+import {ATTR_COLOR_LOC, ATTR_COLOR_NAME, ATTR_POSITION_LOC, ATTR_POSITION_NAME} from './Scene';
 
-        if (this.program != null) {
+class Shader {
+    program;
+    gl;
+    attribLoc;
+    uniformLoc;
+
+    constructor(gl, vertShaderSrc, fragShaderSrc) {
+        this.program = ShaderUtil.createProgramFromText(gl, vertShaderSrc, fragShaderSrc);
+
+        if (this.program !== null) {
             this.gl = gl;
             gl.useProgram(this.program);
             this.attribLoc = ShaderUtil.getStandardAttribLocations(gl, this.program);
@@ -50,7 +57,7 @@ class Shader {
         if (modal.mesh.noCulling) this.gl.disable(this.gl.CULL_FACE);
         if (modal.mesh.doBlending) this.gl.enable(this.gl.BLEND);
 
-        if (modal.mesh.indexCount) this.gl.drawElements(modal.mesh.drawMode, modal.mesh.indexCount, gl.UNSIGNED_SHORT, 0);
+        if (modal.mesh.indexCount) this.gl.drawElements(modal.mesh.drawMode, modal.mesh.indexCount, this.gl.UNSIGNED_SHORT, 0);
         else this.gl.drawArrays(modal.mesh.drawMode, 0, modal.mesh.vertexCount);
 
         this.gl.bindVertexArray(null);
@@ -62,16 +69,6 @@ class Shader {
 }
 
 class ShaderUtil {
-    static domShaderSrc(elmID) {
-        let elm = document.getElementById(elmID);
-        if (!elm || elm.text === '') {
-            console.log(elmID + ' shader not found or no text.');
-            return null;
-        }
-
-        return elm.text;
-    }
-
     static createShader(gl, src, type) {
         let shader = gl.createShader(type);
         gl.shaderSource(shader, src);
@@ -119,22 +116,6 @@ class ShaderUtil {
         return prog;
     }
 
-    static domShaderProgram(gl, vectID, fragID) {
-        let vShaderTxt = ShaderUtil.domShaderSrc(vectID);
-        if (!vShaderTxt) return null;
-        let fShaderTxt = ShaderUtil.domShaderSrc(fragID);
-        if (!fShaderTxt) return null;
-        let vShader = ShaderUtil.createShader(gl, vShaderTxt, gl.VERTEX_SHADER);
-        if (!vShader) return null;
-        let fShader = ShaderUtil.createShader(gl, fShaderTxt, gl.FRAGMENT_SHADER);
-        if (!fShader) {
-            gl.deleteShader(vShader);
-            return null;
-        }
-
-        return ShaderUtil.createProgram(gl, vShader, fShader, true);
-    }
-
     static createProgramFromText(gl, vShaderTxt, fShaderTxt) {
         let vShader = ShaderUtil.createShader(gl, vShaderTxt, gl.VERTEX_SHADER);
         if (!vShader) return null;
@@ -164,7 +145,7 @@ class ShaderUtil {
     }
 }
 
-class GridAxisShader extends Shader {
+export class GridAxisShader extends Shader {
     constructor(gl, pMatrix) {
         const vertSrc = '#version 300 es\n' +
             'in vec3 a_position;' +
@@ -195,7 +176,7 @@ class GridAxisShader extends Shader {
     }
 }
 
-class PrimitiveShader extends Shader {
+export class PrimitiveShader extends Shader {
     constructor(gl, pMatrix) {
         const vertSrc = `#version 300 es
 		in vec3 a_position;	//Standard position data.

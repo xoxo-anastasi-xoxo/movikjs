@@ -1,4 +1,9 @@
-class Modal {
+import {Transform} from './Transform';
+
+export class Modal {
+    transform;
+    mesh;
+
     constructor(meshData) {
         this.transform = new Transform();
         this.mesh = meshData;

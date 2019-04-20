@@ -8,7 +8,14 @@ rloop = new RenderLoop(function(dt){
 },10).start();
 */
 
-class RenderLoop {
+export class RenderLoop {
+    msLastFrame;
+    callBack;
+    isActive;
+    fps;
+    msFpsLimit;
+    run;
+
     constructor(callback, fps) {
         let oThis = this;
         this.msLastFrame = null;	//The time in Miliseconds of the last frame.
