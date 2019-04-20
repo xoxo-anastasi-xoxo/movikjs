@@ -1,6 +1,6 @@
 import {Camera, CameraController} from './Camera';
 import {Primatives} from './Primatives'
-import {GridAxisShader, PrimitiveShader} from './Shaders';
+import {GridAxisShader, Primitive3DShader} from './Shaders';
 import {RenderLoop} from './RenderLoop';
 
 export const ATTR_POSITION_NAME = 'a_position';
@@ -158,7 +158,7 @@ class Point {
     gShader;
 
     constructor(gl, camera, vec, color) {
-        this.gShader = new PrimitiveShader(gl, camera.projectionMatrix);
+        this.gShader = new Primitive3DShader(gl, camera.projectionMatrix);
         this.gModal = Primatives.Point.createModal(gl, 'point', vec.toArray(), color.toArray());
     }
 }
@@ -178,7 +178,7 @@ class Primitive {
         this.parseStructure();
         this.gl = gl;
 
-        this.gShader = new PrimitiveShader(gl, camera.projectionMatrix);
+        this.gShader = new Primitive3DShader(gl, camera.projectionMatrix);
         this.gModal = Primatives.Primitive.createModal(gl, this.name, this.verts, this.colors);
     }
 

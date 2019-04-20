@@ -176,7 +176,7 @@ export class GridAxisShader extends Shader {
     }
 }
 
-export class PrimitiveShader extends Shader {
+export class Primitive3DShader extends Shader {
     constructor(gl, pMatrix) {
         const vertSrc = `#version 300 es
 		in vec3 a_position;	//Standard position data.
