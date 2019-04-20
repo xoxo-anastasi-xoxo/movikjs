@@ -1,9 +1,18 @@
+import {Camera, CameraController} from './Camera';
+
 const ATTR_POSITION_NAME = 'a_position';
 const ATTR_POSITION_LOC = 0;
 const ATTR_COLOR_NAME = 'a_color';
 const ATTR_COLOR_LOC = 1;
 
-class Scene {
+export class Scene {
+    canvas;
+    gl;
+    gCamera;
+    gCameraCtrl;
+    gGridShader;
+    gGridModal;
+    RLoop;
     _primitives = [];
     _points = [];
 
@@ -45,7 +54,7 @@ class Scene {
 
         // Превращаем массивы в GL буферы и заполняем VAO, которые будут предопределять буферы стандартных атрибутов шейдера.
         gl.fCreateMeshVAO = function (name, arrVert, arrCol, drawMode = this.LINES) {
-            let res = {drawMode};
+            let res: any = {drawMode};
 
             res.vao = this.createVertexArray();
             this.bindVertexArray(res.vao);
@@ -142,6 +151,9 @@ class Scene {
 }
 
 class Point {
+    gModal;
+    gShader;
+
     constructor(gl, camera, vec, color) {
         this.gShader = new PrimitiveShader(gl, camera.projectionMatrix);
         this.gModal = Primatives.Point.createModal(gl, 'point', vec.toArray(), color.toArray());
@@ -149,6 +161,15 @@ class Point {
 }
 
 class Primitive {
+    structure;
+    gl;
+    gShader;
+    gModal;
+    name;
+    effectors;
+    colors;
+    verts;
+
     constructor(gl, camera, structure) {
         this.structure = structure;
         this.parseStructure();

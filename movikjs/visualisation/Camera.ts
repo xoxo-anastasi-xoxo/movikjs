@@ -1,8 +1,8 @@
-class Camera {
+export class Camera {
     constructor(gl, fov = 45, near = 0.1, far = 100.0) {
         this.projectionMatrix = new Float32Array(16);
         const ratio = gl.canvas.width / gl.canvas.height;
-        MovikJS.Mat4f.perspective(this.projectionMatrix, fov, ratio, near, far);
+        Mat4f.perspective(this.projectionMatrix, fov, ratio, near, far);
 
         this.transform = new Transform();
         this.viewMatrix = new Float32Array(16);
@@ -26,21 +26,21 @@ class Camera {
     updateViewMatrix() {
 
         this.transform.matView.reset()
-        .rotateX(this.transform.rotation.x * MovikJS.Utils.DEGS_TO_RADS)
-        .rotateY(this.transform.rotation.y * MovikJS.Utils.DEGS_TO_RADS)
+        .rotateX(this.transform.rotation.x * Utils.DEGS_TO_RADS)
+        .rotateY(this.transform.rotation.y * Utils.DEGS_TO_RADS)
         .vtranslate(this.transform.position);
 
 
 
         this.transform.updateDirection();
 
-        MovikJS.Mat4f.invert(this.viewMatrix, this.transform.matView.raw);
+        Mat4f.invert(this.viewMatrix, this.transform.matView.raw);
         return this.viewMatrix;
     }
 }
 
 
-class CameraController {
+export class CameraController {
     constructor(gl, camera) {
         const oThis = this;
         const box = gl.canvas.getBoundingClientRect();

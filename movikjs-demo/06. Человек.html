@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Человек</title>
     <script src="../movikjs-build/movik.js"></script>
-    <script src="../movikjs-visualisation/Shaders.js"></script>
-    <script src="../movikjs-visualisation/Scene.js"></script>
-    <script src="../movikjs-visualisation/RenderLoop.js"></script>
-    <script src="../movikjs-visualisation/Transform.js"></script>
-    <script src="../movikjs-visualisation/Camera.js"></script>
-    <script src="../movikjs-visualisation/Primatives.js"></script>
-    <script src="../movikjs-visualisation/Modal.js"></script>
+    <script src="../movikjs/visualisation/Shaders.js"></script>
+    <script src="../movikjs/visualisation/Scene.js"></script>
+    <script src="../movikjs/visualisation/RenderLoop.js"></script>
+    <script src="../movikjs/visualisation/Transform.js"></script>
+    <script src="../movikjs/visualisation/Camera.js"></script>
+    <script src="../movikjs/visualisation/Primatives.js"></script>
+    <script src="../movikjs/visualisation/Modal.js"></script>
     <style>
         html,body{margin:0; padding:0; width:100%; height:100%;}
         body{background-color:#404040;}
@@ -116,7 +116,7 @@
 
 
         const joint2 = new FabrikJoint3D();
-        joint2.setHingeJoint(MovikJS.JointType.GLOBAL_HINGE,  new Vec3f(Vec3f.X_AXIS), 170, 3, defaultBoneDirection.negated());
+        joint2.setHingeJoint(MovikJS.JointType.LOCAL_HINGE,  new Vec3f(Vec3f.X_AXIS), 3, 170, defaultBoneDirection.cross(Vec3f.X_AXIS));
         hand.getChain()[2].setJoint(joint2);
         return hand;
     }
@@ -139,7 +139,7 @@
         hand.setHingeBaseboneConstraint(MovikJS.BaseboneConstraintType3D.GLOBAL_HINGE, new Vec3f(Vec3f.Z_AXIS), 10, 10, new Vec3f(Vec3f.X_AXIS).negated());
 
         // const joint2 = new FabrikJoint3D();
-        // joint2.setHingeJoint(MovikJS.JointType.LOCAL_HINGE,  new Vec3f(Vec3f.X_AXIS), 170, 3, defaultBoneDirection.negated());
+        // joint2.setHingeJoint(MovikJS.JointType.LOCAL_HINGE,  new Vec3f(Vec3f.X_AXIS), 3, 170, defaultBoneDirection.negated());
         // body.getChain()[2].setJoint(joint2);
         return hand;
     }
@@ -173,7 +173,9 @@
     // setTimeout(() => {primitive.moveTo(1, new Vec3f(0.9, 1.1, 0));}, 6000);
 
     // Бег
-    setTimeout(() => {primitive.moveTo(3, new Vec3f(0.5, 0.3, 0));}, 1000);
+    scene.addPoint(new Vec3f(0.5, 0.3, 0), Utils.MAGENTA);
+    // setTimeout(() => {primitive.moveTo(3, new Vec3f(0.5, 0.3, 0));}, 1000);
+    setTimeout(() => {primitive.moveTo(3, new Vec3f(0.5, 0.1, 0.2));}, 1000);
 </script>
 </body>
 </html>

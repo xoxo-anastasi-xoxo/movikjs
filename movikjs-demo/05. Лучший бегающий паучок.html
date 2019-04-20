@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Лучший бегающий паучок</title>
     <script src="../movikjs-build/movik.js"></script>
-    <script src="../movikjs-visualisation/Shaders.js"></script>
-    <script src="../movikjs-visualisation/Scene.js"></script>
-    <script src="../movikjs-visualisation/RenderLoop.js"></script>
-    <script src="../movikjs-visualisation/Transform.js"></script>
-    <script src="../movikjs-visualisation/Camera.js"></script>
-    <script src="../movikjs-visualisation/Primatives.js"></script>
-    <script src="../movikjs-visualisation/Modal.js"></script>
+    <script src="../movikjs/visualisation/Shaders.js"></script>
+    <script src="../movikjs/visualisation/Scene.js"></script>
+    <script src="../movikjs/visualisation/RenderLoop.js"></script>
+    <script src="../movikjs/visualisation/Transform.js"></script>
+    <script src="../movikjs/visualisation/Camera.js"></script>
+    <script src="../movikjs/visualisation/Primatives.js"></script>
+    <script src="../movikjs/visualisation/Modal.js"></script>
     <style>
         html,body{margin:0; padding:0; width:100%; height:100%;}
         body{background-color:#404040;}
@@ -26,7 +26,7 @@
 <script>
     const {Vec3f, FabrikBone3D, Utils, FabrikChain3D, FabrikJoint3D} = MovikJS;
 
-    const defaultStartLocation = new Vec3f(0, 0.24, 0);
+    const defaultStartLocation = new Vec3f(0, 0.13, 0);
     const defaultBoneDirection   = new Vec3f(Vec3f.Y_AXIS).negated();
     const defaultBoneLength      = 0.2;
     let boneColour = Utils.GREY;
@@ -46,7 +46,7 @@
 
     function getLap(index, angle) {
         const lap = new FabrikChain3D(index + ' лапка');
-        const vec = Vec3f.rotateYDegs(Vec3f.rotateXDegs(Vec3f.Z_AXIS, 15), angle);
+        const vec = Vec3f.rotateYDegs(Vec3f.rotateXDegs(Vec3f.Z_AXIS, -20), angle);
 
         lap.addBone(
             new FabrikBone3D(
@@ -62,7 +62,7 @@
 
         const joint2 = new FabrikJoint3D();
 
-        joint2.setAsBallJoint(100);
+        joint2.setAsBallJoint(110);
 
         lap.getChain()[1].setJoint(joint2);
 
