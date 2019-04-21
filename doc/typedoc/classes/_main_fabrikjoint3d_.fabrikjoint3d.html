@@ -1,0 +1,1006 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>FabrikJoint3D | </title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title"></a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_main_fabrikjoint3d_.html">&quot;main/FabrikJoint3D&quot;</a>
+				</li>
+				<li>
+					<a href="_main_fabrikjoint3d_.fabrikjoint3d.html">FabrikJoint3D</a>
+				</li>
+			</ul>
+			<h1>Class FabrikJoint3D</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Сустав, определяющий углы-ограничения между костями цепи.</p>
+						<p>
+							Существует три типа суставов:
+							<ul>
+								<li>JointType.BALL - сустав будет вращаться на один и тот же угол во все стороны относительно предыдущей кости
+								в цепи или относительно мировой системы координат, в случае если это начальная кость цепи,</li>
+								<li>JointType.GLOBAL_HINGE - сустав, для которого заданы углы-ограничители относительно мировой системы координат
+								для выбранной оси по и против часовой стрелки,</li>
+								<li>JointType.LOCAL_HINGE - сустав, для которого заданы углы-ограничители относительно предыдущей кости
+								для выбранной оси по и против часовой стрелки.</li>
+							</ul>
+							Шаровой сустав может вращаться в любую сторону относительно положения предыдущей кости в цепи.
+							Угол-ограничитель в 180 градусов будет давать суставу полную свободу движения, а угол в 0
+							градусов не предусматривает движения совсем, делая текущую кость продолжением предыдущей.
+							<p>
+								Шарнирный сустав может вращаться по и против часовой стрелки вдоль каждой оси на допустимое число градусов [0..180].
+								Локальный шарнир ведет отсчет градусов относительно предыдущей кости в цепи,
+								а глобальный - относительно мировой системы координат.
+								<p>
+									Каждая FabrikBone3D имеет один FabrikJoint3D, который располагается в начальной точке кости {@code mStartLocation}.
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">FabrikJoint3D</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_hingeanticlockwiseconstraintdegs" class="tsd-kind-icon">_hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_hingeclockwiseconstraintdegs" class="tsd-kind-icon">_hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_jointtype" class="tsd-kind-icon">_joint<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_referenceaxisuv" class="tsd-kind-icon">_reference<wbr>AxisUV</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_rotationaxisuv" class="tsd-kind-icon">_rotation<wbr>AxisUV</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_rotorconstraintdegs" class="tsd-kind-icon">_rotor<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#max_constraint_angle_degs" class="tsd-kind-icon">MAX_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#min_constraint_angle_degs" class="tsd-kind-icon">MIN_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#getballjointconstraintdegs" class="tsd-kind-icon">get<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingeanticlockwiseconstraintdegs" class="tsd-kind-icon">get<wbr>Hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingeclockwiseconstraintdegs" class="tsd-kind-icon">get<wbr>Hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingereferenceaxis" class="tsd-kind-icon">get<wbr>Hinge<wbr>Reference<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingerotationaxis" class="tsd-kind-icon">get<wbr>Hinge<wbr>Rotation<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#getjointtype" class="tsd-kind-icon">get<wbr>Joint<wbr>Type</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#set" class="tsd-kind-icon">set</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#setasballjoint" class="tsd-kind-icon">set<wbr>AsBall<wbr>Joint</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#setballjointconstraintdegs" class="tsd-kind-icon">set<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingejoint" class="tsd-kind-icon">set<wbr>Hinge<wbr>Joint</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingejointanticlockwiseconstraintdegs" class="tsd-kind-icon">set<wbr>Hinge<wbr>Joint<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingejointclockwiseconstraintdegs" class="tsd-kind-icon">set<wbr>Hinge<wbr>Joint<wbr>Clockwise<wbr>Constraint<wbr>Degs</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingereferenceaxis" class="tsd-kind-icon">set<wbr>Hinge<wbr>Reference<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingerotationaxis" class="tsd-kind-icon">set<wbr>Hinge<wbr>Rotation<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_validateaxis" class="tsd-kind-icon">_validate<wbr>Axis</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_validateconstraintangledegs" class="tsd-kind-icon">_validate<wbr>Constraint<wbr>Angle<wbr>Degs</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Fabrik<wbr>Joint3D<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">?: </span><a href="_main_fabrikjoint3d_.fabrikjoint3d.html" class="tsd-signature-type">FabrikJoint3D</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_main_fabrikjoint3d_.fabrikjoint3d.html" class="tsd-signature-type">FabrikJoint3D</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L77">main/FabrikJoint3D.ts:77</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Конструктор.</p>
+									<p>
+										Принимает 2 возможных сочетания параметров:
+										<p>
+											Без параметров.
+											Все поля получают занчения по умолчанию.
+											Задать недефолтные значения можно через методы
+											setAsGlobalHinge(Vec3f, number, number, Vec3f) и
+											setAsLocalHinge(Vec3f, number, number, Vec3f).
+											<p>
+												Конструктор копирования.
+												Создаёт глубокую копию сустава.
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> source: <a href="_main_fabrikjoint3d_.fabrikjoint3d.html" class="tsd-signature-type">FabrikJoint3D</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Сустав источник.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_main_fabrikjoint3d_.fabrikjoint3d.html" class="tsd-signature-type">FabrikJoint3D</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_hingeanticlockwiseconstraintdegs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</h3>
+					<div class="tsd-signature tsd-kind-icon">_hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;FabrikJoint3D.MAX_CONSTRAINT_ANGLE_DEGS</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L62">main/FabrikJoint3D.ts:62</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Угол в градусах, на который сустав позволяет повернуться против часовой стрелки
+							относительно выбранной оси и системы координат (для шарнирных суставов).</p>
+							<p>
+								Допустимые значения  [0..180].
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>180.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_hingeclockwiseconstraintdegs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs</h3>
+					<div class="tsd-signature tsd-kind-icon">_hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;FabrikJoint3D.MAX_CONSTRAINT_ANGLE_DEGS</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L52">main/FabrikJoint3D.ts:52</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Угол в градусах, на который сустав позволяет повернуться по часовой стрелке
+							относительно выбранной оси и системы координат (для шарнирных суставов).</p>
+							<p>
+								Допустимые значения  [0..180].
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>180.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_jointtype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _joint<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">_joint<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_main_jointtype_.jointtype.html" class="tsd-signature-type">JointType</a><span class="tsd-signature-symbol"> =&nbsp;JointType.BALL</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L77">main/FabrikJoint3D.ts:77</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Тип сустава.</p>
+							<p>
+								Допустимые значения - JointType.BALL, JointType.GLOBAL_HINGE или JointType.LOCAL_HINGE.
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>JointType.BALL</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_referenceaxisuv" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _reference<wbr>AxisUV</h3>
+					<div class="tsd-signature tsd-kind-icon">_reference<wbr>AxisUV<span class="tsd-signature-symbol">:</span> <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a><span class="tsd-signature-symbol"> =&nbsp;new Vec3f()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L68">main/FabrikJoint3D.ts:68</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Опорная ось шарнирного сустава.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_rotationaxisuv" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _rotation<wbr>AxisUV</h3>
+					<div class="tsd-signature tsd-kind-icon">_rotation<wbr>AxisUV<span class="tsd-signature-symbol">:</span> <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a><span class="tsd-signature-symbol"> =&nbsp;new Vec3f()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L65">main/FabrikJoint3D.ts:65</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Ось вращения шарнирного сустава.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_rotorconstraintdegs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _rotor<wbr>Constraint<wbr>Degs</h3>
+					<div class="tsd-signature tsd-kind-icon">_rotor<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;FabrikJoint3D.MAX_CONSTRAINT_ANGLE_DEGS</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L42">main/FabrikJoint3D.ts:42</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Угол-ограничение в градусах, на который позволяет повернуться сустав (для шаровых суставов).</p>
+							<p>
+								Допустимые значения  [0..180].
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>180.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="max_constraint_angle_degs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> MAX_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS</h3>
+					<div class="tsd-signature tsd-kind-icon">MAX_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;180</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L33">main/FabrikJoint3D.ts:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Максимальный угол-ограничение для любого из направлений в градусах. Даёт кости полную свободу.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="min_constraint_angle_degs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> MIN_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS</h3>
+					<div class="tsd-signature tsd-kind-icon">MIN_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L30">main/FabrikJoint3D.ts:30</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Минимальный угол-ограничение для любого из направлений в градусах. Полностью обездвиживает кость.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getballjointconstraintdegs" class="tsd-anchor"></a>
+					<h3>get<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L245">main/FabrikJoint3D.ts:245</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Возвращает угол ограничение шарового сустава.</p>
+									<p>
+										Вызывает ошибку, если тип сустава не шаровой
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>Угол-ограничение в градусах.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gethingeanticlockwiseconstraintdegs" class="tsd-anchor"></a>
+					<h3>get<wbr>Hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L212">main/FabrikJoint3D.ts:212</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Возвращает угол-ограничение против часовой стрелки для шарнирного сустава.</p>
+									<p>
+										Вызывает ошибку, если тип сустава не шарнирный.
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>Угол-ограничение против часовой стрелки в градусах.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gethingeclockwiseconstraintdegs" class="tsd-anchor"></a>
+					<h3>get<wbr>Hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L179">main/FabrikJoint3D.ts:179</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Возвращает угол-ограничение по часовой стрелке для шарнирного сустава.</p>
+									<p>
+										Вызывает ошибку, если тип сустава не шарнирный.
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>Угол-ограничение по часовой стрелке в градусах.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gethingereferenceaxis" class="tsd-anchor"></a>
+					<h3>get<wbr>Hinge<wbr>Reference<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Hinge<wbr>Reference<wbr>Axis<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L278">main/FabrikJoint3D.ts:278</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Возвращает опорную ось шарнирного сустава.</p>
+									<p>
+										Если тип сустава не шарнирный, выбрасывается ошибка.
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></h4>
+							<p>Опорная ось.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gethingerotationaxis" class="tsd-anchor"></a>
+					<h3>get<wbr>Hinge<wbr>Rotation<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Hinge<wbr>Rotation<wbr>Axis<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L310">main/FabrikJoint3D.ts:310</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Возвращает ось вращения шарнирного сустава.</p>
+									<p>
+										Если у сустава тип JointType.BALL (т.е. он не шарнирный) бросам ошибку.
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></h4>
+							<p>Ось вращения шарнирного сустава.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getjointtype" class="tsd-anchor"></a>
+					<h3>get<wbr>Joint<wbr>Type</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Joint<wbr>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/_main_jointtype_.jointtype.html" class="tsd-signature-type">JointType</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L325">main/FabrikJoint3D.ts:325</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Возвращает тип сустава.</p>
+									<p>
+										Допустимые значения: JointType.BALL, JointType.GLOBAL_HINGE, JointType.LOCAL_HINGE.
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../enums/_main_jointtype_.jointtype.html" class="tsd-signature-type">JointType</a></h4>
+							<p>Тип сустава.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="set" class="tsd-anchor"></a>
+					<h3>set</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><a href="_main_fabrikjoint3d_.fabrikjoint3d.html" class="tsd-signature-type">FabrikJoint3D</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L104">main/FabrikJoint3D.ts:104</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Делает из данного сустава глубокую копию сустава-источника.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>source: <a href="_main_fabrikjoint3d_.fabrikjoint3d.html" class="tsd-signature-type">FabrikJoint3D</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Сустав источник.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setasballjoint" class="tsd-anchor"></a>
+					<h3>set<wbr>AsBall<wbr>Joint</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>AsBall<wbr>Joint<span class="tsd-signature-symbol">(</span>constraintAngleDegs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L119">main/FabrikJoint3D.ts:119</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Задаёт данному суставу шаровой тип.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>constraintAngleDegs: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Максимальный допустимый угол в градусах между костью сустава и предыдущей костью в цепи.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setballjointconstraintdegs" class="tsd-anchor"></a>
+					<h3>set<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">(</span>angleDegs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L228">main/FabrikJoint3D.ts:228</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Задаёт угол-ограничение для шарового сустава.</p>
+									<p>
+										Вызывает ошибку, если тип сустава не шаровой или
+										угол выходит за границы допустимых значений.
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>angleDegs: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Угол-ограничение в градусах.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sethingejoint" class="tsd-anchor"></a>
+					<h3>set<wbr>Hinge<wbr>Joint</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Hinge<wbr>Joint<span class="tsd-signature-symbol">(</span>jointType<span class="tsd-signature-symbol">: </span><a href="../enums/_main_jointtype_.jointtype.html" class="tsd-signature-type">JointType</a>, rotationAxis<span class="tsd-signature-symbol">: </span><a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a>, clockwiseConstraintDegs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, anticlockwiseConstraintDegs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, referenceAxis<span class="tsd-signature-symbol">: </span><a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L135">main/FabrikJoint3D.ts:135</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Задаёт данному суставу шарнирный тип.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jointType: <a href="../enums/_main_jointtype_.jointtype.html" class="tsd-signature-type">JointType</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Тип сустава, допустимы и BALL, и GLOBAL_HINGE, и LOCAL_HINGE.</p>
+									</div>
+								</li>
+								<li>
+									<h5>rotationAxis: <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Ось вращения шарнира.</p>
+									</div>
+								</li>
+								<li>
+									<h5>clockwiseConstraintDegs: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Угол ограничение по часовой стрелке относительно опорной оси.</p>
+									</div>
+								</li>
+								<li>
+									<h5>anticlockwiseConstraintDegs: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Угол ограничение против часовой стрелки относительно опорной оси.</p>
+									</div>
+								</li>
+								<li>
+									<h5>referenceAxis: <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Опорная ось.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sethingejointanticlockwiseconstraintdegs" class="tsd-anchor"></a>
+					<h3>set<wbr>Hinge<wbr>Joint<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Hinge<wbr>Joint<wbr>Anticlockwise<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">(</span>angleDegs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L195">main/FabrikJoint3D.ts:195</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Задаёт угол ограничение против часовой стрелки для шарнирного сустава.</p>
+									<p>
+										Вызывает ошибки, если угол выходит за границы допустимых значений и
+										если тип сустава не шарнирный.
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>angleDegs: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Угол ограничение против часовой стрелки в градусах.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sethingejointclockwiseconstraintdegs" class="tsd-anchor"></a>
+					<h3>set<wbr>Hinge<wbr>Joint<wbr>Clockwise<wbr>Constraint<wbr>Degs</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Hinge<wbr>Joint<wbr>Clockwise<wbr>Constraint<wbr>Degs<span class="tsd-signature-symbol">(</span>angleDegs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L162">main/FabrikJoint3D.ts:162</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Задаёт угол ограничение по часовой стрелке для шарнирного сустава.</p>
+									<p>
+										Вызывает ошибки, если угол выходит за границы допустимых значений и
+										если тип сустава не шарнирный.
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>angleDegs: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Угол ограничение по часовой стрелке в градусах.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sethingereferenceaxis" class="tsd-anchor"></a>
+					<h3>set<wbr>Hinge<wbr>Reference<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Hinge<wbr>Reference<wbr>Axis<span class="tsd-signature-symbol">(</span>referenceAxis<span class="tsd-signature-symbol">: </span><a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L293">main/FabrikJoint3D.ts:293</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Задаёт опорную ось шарнирного сустава, относительно которой измеряется угол вращения сустава.</p>
+									<p>
+										Вызывает ошибки, если переданная ось имеет нулевую длину и если тип сустава не шарнирный.
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>referenceAxis: <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Опорная ось.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sethingerotationaxis" class="tsd-anchor"></a>
+					<h3>set<wbr>Hinge<wbr>Rotation<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Hinge<wbr>Rotation<wbr>Axis<span class="tsd-signature-symbol">(</span>axis<span class="tsd-signature-symbol">: </span><a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L261">main/FabrikJoint3D.ts:261</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Задаёт ось вращения шарнирного сустава как нормализованную версию исходной оси.</p>
+									<p>
+										Вызывает ошибки, если переданная ось имеет нулевую длину и если тип сустава не шарнирный.
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>axis: <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Ось вращения.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="_validateaxis" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> _validate<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">_validate<wbr>Axis<span class="tsd-signature-symbol">(</span>axis<span class="tsd-signature-symbol">: </span><a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L335">main/FabrikJoint3D.ts:335</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>axis: <a href="_utils_vec3f_.vec3f.html" class="tsd-signature-type">Vec3f</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="_validateconstraintangledegs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> _validate<wbr>Constraint<wbr>Angle<wbr>Degs</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">_validate<wbr>Constraint<wbr>Angle<wbr>Degs<span class="tsd-signature-symbol">(</span>angleDegs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/xoxo-anastasi-xoxo/movikjs/blob/6f2414a/src/main/FabrikJoint3D.ts#L329">main/FabrikJoint3D.ts:329</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>angleDegs: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_main_fabrikjoint3d_.html">"main/<wbr>Fabrik<wbr>Joint3<wbr>D"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_main_fabrikjoint3d_.fabrikjoint3d.html" class="tsd-kind-icon">Fabrik<wbr>Joint3D</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_hingeanticlockwiseconstraintdegs" class="tsd-kind-icon">_hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_hingeclockwiseconstraintdegs" class="tsd-kind-icon">_hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_jointtype" class="tsd-kind-icon">_joint<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_referenceaxisuv" class="tsd-kind-icon">_reference<wbr>AxisUV</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_rotationaxisuv" class="tsd-kind-icon">_rotation<wbr>AxisUV</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_rotorconstraintdegs" class="tsd-kind-icon">_rotor<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#max_constraint_angle_degs" class="tsd-kind-icon">MAX_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#min_constraint_angle_degs" class="tsd-kind-icon">MIN_<wbr>CONSTRAINT_<wbr>ANGLE_<wbr>DEGS</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#getballjointconstraintdegs" class="tsd-kind-icon">get<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingeanticlockwiseconstraintdegs" class="tsd-kind-icon">get<wbr>Hinge<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingeclockwiseconstraintdegs" class="tsd-kind-icon">get<wbr>Hinge<wbr>Clockwise<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingereferenceaxis" class="tsd-kind-icon">get<wbr>Hinge<wbr>Reference<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#gethingerotationaxis" class="tsd-kind-icon">get<wbr>Hinge<wbr>Rotation<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#getjointtype" class="tsd-kind-icon">get<wbr>Joint<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#set" class="tsd-kind-icon">set</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#setasballjoint" class="tsd-kind-icon">set<wbr>AsBall<wbr>Joint</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#setballjointconstraintdegs" class="tsd-kind-icon">set<wbr>Ball<wbr>Joint<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingejoint" class="tsd-kind-icon">set<wbr>Hinge<wbr>Joint</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingejointanticlockwiseconstraintdegs" class="tsd-kind-icon">set<wbr>Hinge<wbr>Joint<wbr>Anticlockwise<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingejointclockwiseconstraintdegs" class="tsd-kind-icon">set<wbr>Hinge<wbr>Joint<wbr>Clockwise<wbr>Constraint<wbr>Degs</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingereferenceaxis" class="tsd-kind-icon">set<wbr>Hinge<wbr>Reference<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#sethingerotationaxis" class="tsd-kind-icon">set<wbr>Hinge<wbr>Rotation<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_validateaxis" class="tsd-kind-icon">_validate<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_main_fabrikjoint3d_.fabrikjoint3d.html#_validateconstraintangledegs" class="tsd-kind-icon">_validate<wbr>Constraint<wbr>Angle<wbr>Degs</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
