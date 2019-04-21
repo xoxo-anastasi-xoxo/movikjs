@@ -2,53 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Змейка 2D</title>
-    <script src="../build/movik.js"></script>
+    <title>04. Unfixed. Snake with constraints.</title>
+    <script src="../../build/movik.js"></script>
     <style>
-        body {
-            margin: 0;
-        }
+        html,body{margin:0; padding:0; width:100%; height:100%;}
+        body{background-color:#404040;}
 
-        canvas {
-            width: 100vw;
-            height: 100vh;
-            display: block;
-        }
+        canvas{border:1px solid black; position:relative; }
+        div{display:flex; width:100%; height:100%; align-items:center; justify-content:center;}
     </style>
 </head>
 <body>
-<script type="text/javascript">
-    const {FabrikChain2D, FabrikBone2D, Vec2f, Utils} = MovikJS;
+<div>
+    <canvas id="scene"></canvas>
+</div>
+<script>
+    const {Vec2f, FabrikBone2D, Utils, FabrikChain2D, FabrikStructure2D, Colour4f} = MovikJS;
 
     const chain = new FabrikChain2D();
 
-    const baseBone = new FabrikBone2D( new Vec2f(), new Vec2f(1.0, 0.0), 0.1, null, null, Utils.MAGENTA);
+    const baseBone = new FabrikBone2D( new Vec2f(), new Vec2f(1.0, 0.0), .1, null, null, Utils.BLUE);
     chain.addBone(baseBone);
 
-    const boneLength = 0.1;
+    const boneLength = .1;
     const defaultUV  = new Vec2f(1.0, 0.0);
-    const numBones = 13;
+    const numBones   = 30;
+    const rotStep    = 360.0 / numBones;
     for (let loop = 0; loop < numBones; loop++) {
-        const rotatedUV = Vec2f.rotateDegs(defaultUV, loop * numBones);
+        const rotatedUV = Vec2f.rotateDegs(defaultUV, loop * rotStep);
 
-        chain.addConsecutiveConstrainedBone(rotatedUV, boneLength, 60.0, 60.0, Utils.MAGENTA);
+        chain.addConsecutiveConstrainedBone(rotatedUV, boneLength, 60, 60, loop % 2 === 1 ? Utils.BLUE : new Colour4f(Utils.BLUE.toArray()).lighten(0.3));
     }
 
     chain.setFixedBaseMode(false);
 
-    const st = new MovikJS.FabrikStructure2D();
+    const st = new FabrikStructure2D();
     st.addChain(chain);
+
 </script>
-<canvas is="my-scene" id="scene"> </canvas>
 <script>
     const {Scene} = MovikJS;
     const scene = new Scene('scene', 2);
-    scene.init(true);
+    scene.init();
 
     const primitive = scene.addPrimitive(st);
 </script>
-<script type="text/javascript">
-
+<script>
     let isDragging = false;
     const moveHandler = (e) => {
         if (!isDragging) {

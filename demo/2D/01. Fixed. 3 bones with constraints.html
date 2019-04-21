@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01. Fixed. 3 bones with constraints.</title>
+    <script src="../../build/movik.js"></script>
+    <style>
+        html,body{margin:0; padding:0; width:100%; height:100%;}
+        body{background-color:#404040;}
+
+        canvas{border:1px solid black; position:relative; }
+        div{display:flex; width:100%; height:100%; align-items:center; justify-content:center;}
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="scene"></canvas>
+</div>
+<script>
+    const {Vec2f, FabrikBone2D, Utils, FabrikChain2D, FabrikStructure2D, BaseboneConstraintType2D} = MovikJS;
+
+    const chain = new FabrikChain2D();
+
+    const boneLength = 0.4;
+
+    const basebone = new FabrikBone2D(new Vec2f(0.0, -boneLength), new Vec2f(0.0, 0.0), null, 25, 90, Utils.BLACK);
+    chain.addBone(basebone);
+
+    chain.setFixedBaseMode(true);
+    chain.setBaseboneConstraintType(BaseboneConstraintType2D.GLOBAL_ABSOLUTE);
+    chain.setBaseboneConstraintUV( new Vec2f(0.0, 1.0) );
+
+    chain.addConsecutiveConstrainedBone(new Vec2f(0.0, 1.0), boneLength, 50.0, 90.0, Utils.GREY);
+
+    chain.addConsecutiveConstrainedBone(new Vec2f(0.0, 1.0), boneLength, 75.0, 90.0, Utils.GREEN);
+
+    const st = new FabrikStructure2D();
+    st.addChain(chain);
+
+</script>
+<script>
+    const {Scene} = MovikJS;
+    const scene = new Scene('scene', 2);
+    scene.init();
+
+    const primitive = scene.addPrimitive(st);
+</script>
+<script>
+    let isDragging = false;
+    const moveHandler = (e) => {
+        if (!isDragging) {
+            return;
+        }
+        const h = window.innerHeight;
+        const w = window.innerWidth;
+
+        const x = e.clientX;
+        const y = e.clientY;
+
+        let targetX = 3 * (x - (w/2)) / (w/2);
+        const targetY = -3 * (h/w) * (y - (h/2)) / (h/2);
+        primitive.moveTo(0, new Vec2f(targetX, targetY));
+    };
+
+    window.addEventListener('click', (e) => {isDragging = !isDragging; moveHandler(e)});
+    window.addEventListener('mousemove', moveHandler);
+</script>
+</body>
+</html>
