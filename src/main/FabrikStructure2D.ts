@@ -31,6 +31,11 @@ export class FabrikStructure2D {
         this._name = name;
     }
 
+    /**
+     * Задаёт имя структуре.
+     *
+     * @param    name    Желаемое имя.
+     */
     public setName(name: string): void { this._name = name; }
 
     /**
@@ -87,10 +92,22 @@ export class FabrikStructure2D {
 
     }
 
+    /**
+     * Добавляет цепь в структуру.
+     *
+     * @param   chain    Новая цепь.
+     */
     addChain(chain: FabrikChain2D): void {
         this._chains.push(chain);
     }
-
+    /**
+     * Добавляет цепь в структуру, присоединяя ее к существующей в структуре цепи.
+     *
+     * @param   newChain    Новая цепь.
+     * @param   existingChainNumber    Номер цепи, к которой необходимо присоединить новую цепь.
+     * @param   existingBoneNumber    Номер кости, к которой необходимо присоединить новую цепь.
+     * @param   boneConnectionPoint    К началу или к концу кости присоединять.
+     */
     connectChain(chain: FabrikChain2D, chainNumber: number, boneNumber: number, boneConnectionPoint: BoneConnectionPoint, shouldCalcCoordinates: boolean): void {
         chain.setBoneConnectionPoint(boneConnectionPoint);
         if (chainNumber >= this._chains.length) {
@@ -132,10 +149,23 @@ export class FabrikStructure2D {
         this.addChain(relativeChain);
     }
 
+    /**
+     * Возвращает количество цепей в структуре.
+     */
     getNumChains(): number { return this._chains.length; }
 
+    /**
+     * Возвращает цепь структуры по индексу.
+     *
+     * @param    chainNumber    Индекс цепи.
+     */
     getChain(chainNumber: number): FabrikChain2D { return this._chains[chainNumber]; }
 
+    /**
+     * Возвращает имя структуры.
+     *
+     * @return
+     */
     getName(): string {
         return this._name;
     }

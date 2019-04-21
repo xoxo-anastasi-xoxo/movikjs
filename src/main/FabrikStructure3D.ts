@@ -92,14 +92,32 @@ export class FabrikStructure3D {
         }
     }
 
+    /**
+     * Добавляет цепь в структуру.
+     *
+     * @param   chain    Новая цепь.
+     */
     addChain(chain: FabrikChain3D): void {
         this._chains.push(chain);
     }
 
+    /**
+     * Удаляет цепь из структуры.
+     *
+     * @param   chainIndex    Индекс удаляемой цепи.
+     */
     removeChain(chainIndex): void {
         this._chains.splice(chainIndex, 1);
     }
 
+    /**
+     * Добавляет цепь в структуру, присоединяя ее к существующей в структуре цепи.
+     *
+     * @param   newChain    Новая цепь.
+     * @param   existingChainNumber    Номер цепи, к которой необходимо присоединить новую цепь.
+     * @param   existingBoneNumber    Номер кости, к которой необходимо присоединить новую цепь.
+     * @param   boneConnectionPoint    К началу или к концу кости присоединять.
+     */
     connectChain(newChain: FabrikChain3D, existingChainNumber: number, existingBoneNumber: number, boneConnectionPoint: BoneConnectionPoint, shouldCalcCoordinates: boolean): void {
         if (existingChainNumber > this._chains.length) {
             throw new Error('Cannot connect to chain ' + existingChainNumber + ' - no such chain (remember that chains are zero indexed).');
@@ -140,10 +158,18 @@ export class FabrikStructure3D {
         this.addChain(relativeChain);
     }
 
+    /**
+     * Возвращает количество цепей в структуре.
+     */
     getNumChains(): number {
         return this._chains.length;
     }
 
+    /**
+     * Возвращает цепь структуры по индексу.
+     *
+     * @param    chainNumber    Индекс цепи.
+     */
     getChain(chainNumber: number): FabrikChain3D {
         return this._chains[chainNumber];
     }

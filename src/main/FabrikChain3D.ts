@@ -136,8 +136,6 @@ export class FabrikChain3D {
      * Встроенные целевые местоположения позволяют решать ИК структуры для нескольких целей (по одной на цепочку в структуре)
      * вместо того, чтобы все цепочки решались для одной и той же цели. Чтобы использовать встроенные цели, флаг _useEmbeddedTargets
      * должно быть true(что не является значением по умолчанию) - этот флаг можно установить с помощью вызова setEmbeddedTargetMode (true).
-     *
-     * @see {@link setEmbeddedTargetMode(boolean) }
      */
     private _embeddedTarget: Vec3f = new Vec3f();
 
@@ -671,17 +669,19 @@ export class FabrikChain3D {
         this._solveDistanceThreshold = solveDistance;
     }
 
-    /**
-     * Set the colour of all bones in this chain to the specified colour.
-     *
-     * @param    colour    The colour to set all bones in this chain.
-     */
     setColour(colour: Colour4f): void {
         for (let aBone of this._chain) {
             aBone.setColour(colour);
         }
     }
 
+    /**
+     * Решает задачу ИК с помощью алгоритма FABRIK для внутреннего положения.
+     * <p>
+     * Если в цепи еще нет костей - возникнет ошибка.
+     *
+     * @return            Наименьшее расстояние между новым положением эффектора и целевым местоположением, которого удалось достичь.
+     */
     solveForEmbeddedTarget(): number {
         if (this._useEmbeddedTarget) {
             return this.solveForTarget(this._embeddedTarget);
@@ -690,6 +690,14 @@ export class FabrikChain3D {
         }
     }
 
+    /**
+     * Решает задачу ИК с помощью алгоритма FABRIK.
+     * <p>
+     * Если в цепи еще нет костей - возникнет ошибка.
+     *
+     * @param newTarget    Целевое местоположение.
+     * @return            Наименьшее расстояние между новым положением эффектора и целевым местоположением, которого удалось достичь.
+     */
     solveForTarget(newTarget: Vec3f): number {
         if (this._lastTargetLocation.approximatelyEquals(newTarget, 0.00001) &&
             (!this._fixedBaseMode && this._lastBaseLocation.approximatelyEquals(this.getBaseLocation(), 0.00001)) &&

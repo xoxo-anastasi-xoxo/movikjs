@@ -7,3 +7,6 @@ MovikJS
 
 ### Сборка
 npx webpack
+
+### Генерация документации
+typedoc --out doc/typedoc/ src/

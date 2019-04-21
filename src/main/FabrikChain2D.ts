@@ -50,34 +50,103 @@ export class FabrikChain2D {
      */
     private _maxIterationAttempts: number = 15;
 
+    /**
+     * Минимальное значения для дельты рассотояний между итерациями алгоритма.
+     *
+     * @default 0.01
+     */
     private _minIterationChange: number = 0.01;
 
+    /**
+     * Длина цепи.
+     */
     private _chainLength: number = 0;
 
+    /**
+     * Начальная позиция первой кости в цепи.
+     *
+     * @default: Vec3f(0, 0)
+     */
     private _baseLocation: Vec2f = new Vec2f();
-    
+
+    /**
+     * Зафиксирована ли начальная позиция цепи.
+     * Если нет - то она может перемещаться.
+     *
+     * @default true
+     */
     private _fixedBaseMode: boolean = true;
 
+    /**
+     * Тип сустава первой кости в цепи.
+     */
     private _baseboneConstraintType: BaseboneConstraintType2D = BaseboneConstraintType2D.NONE;
 
     private _boneConnectionPoint: BoneConnectionPoint = BoneConnectionPoint.END;
 
+    /**
+     * Направление относительно которого мы ограничиваем первую кость цепи.
+     */
     private _baseboneConstraintUV: Vec2f = new Vec2f();
 
     private _baseboneRelativeConstraintUV: Vec2f = new Vec2f();
 
+    /**
+     * Последняя целевая позиция, относительно которой решалась задача ИК.
+     *
+     * @default Vec3f(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE)
+     */
     private _lastTargetLocation: Vec2f = new Vec2f(Number.MAX_VALUE, Number.MAX_VALUE);
 
+    /**
+     * Предыдущая начальная позиция базовой (первой в цепи) кости.
+     * <p>
+     * Данное значение хранится для того, чтобы сравнивать изменилось ли
+     * начальное положение базовой кости в процессе решения.
+     *
+     * @default Vec3f(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE)
+     */
     private _lastBaseLocation:Vec2f = new Vec2f(Number.MAX_VALUE, Number.MAX_VALUE);
 
+    /**
+     * Встроенное целевое расположение,которое можно использовать для решения ИК.
+     * <p>
+     * Встроенные целевые местоположения позволяют решать ИК структуры для нескольких целей (по одной на цепочку в структуре)
+     * вместо того, чтобы все цепочки решались для одной и той же цели. Чтобы использовать встроенные цели, флаг _useEmbeddedTargets
+     * должно быть true(что не является значением по умолчанию) - этот флаг можно установить с помощью вызова setEmbeddedTargetMode (true).
+     */
     private _embeddedTarget: Vec2f = new Vec2f();
 
+    /**
+     * _useEmbeddedTarget    Следует ли использовать местоположение _embeddedTarget при решении этой цепочки.
+     * <p>
+     * Этот флаг можно переключить, вызвав setEmbeddedTargetMode (true) в цепочке.
+     *
+     * @default false
+     */
     private _useEmbeddedTarget: boolean = false;
 
+    /**
+     * Текущее расстояние между эффектором(концом последней точки в цепи) и целевой позицией.
+     */
     private _currentSolveDistance: number = Number.MAX_VALUE;
 
+    /**
+     * Номер цепи, к которой эта цепь подключена в FabrikStructure3D.
+     * <p>
+     * Если значение -1, значит данная цепь ни с чем не связана.
+     *
+     * @default -1
+     */
     private _connectedChainNumber: number = -1;
 
+    /**
+     * Номер кости, с которой связана эта цепь, если она вообще связана с другой цепью.
+     * <p>
+     * Если значение -1, значит данная цепь ни с чем не связана.
+     *
+     * @default -1
+     */
     private _connectedBoneNumber: number  = -1;
 
     // ---------- Constructors ----------
@@ -125,6 +194,11 @@ export class FabrikChain2D {
 
 // ---------- Public Methods ------------
 
+    /**
+     * Добавляет кость в конец цепи.
+     *
+     * @param    bone    Кость.
+     */
     addBone(bone: FabrikBone2D): void {
         this._chain.push(bone);
 
@@ -175,10 +249,23 @@ export class FabrikChain2D {
         }
     }
 
+    /**
+     * Возвращает тип сустава базовой кости.
+     *
+     * @return
+     */
     getBaseboneConstraintType(): BaseboneConstraintType2D { return this._baseboneConstraintType; }
 
     getBaseboneConstraintUV(): Vec2f { return this._baseboneConstraintUV; }
 
+    /**
+     * Возвращает базовое расположение цепочки IK.
+     * <p>
+     * Независимо от того, сколько костей содержится в цепи, базовое местоположение всегда является начальным местоположением
+     * первой кости в цепи.
+     *
+     * @return
+     */
     getBaseLocation(): Vec2f {
         if (this._chain.length !== 0) {
             return this._chain[0].getStartLocation();
@@ -220,6 +307,13 @@ export class FabrikChain2D {
 
     getNumBones(): number { return this._chain.length; }
 
+    /**
+     * Удаляет кость из этой цепи IK по ее индексу в цепи.
+     * <p>
+     * Если номер кости, которую необходимо удалить, не существует в цепочке, то возникает ошибка.
+     *
+     * @param    boneNumber    Индекс кости в цепи.
+     */
     removeBone(boneNumber: number): void {
         if (boneNumber < this._chain.length) {
             this._chain.splice(boneNumber, 1);
@@ -299,6 +393,14 @@ export class FabrikChain2D {
         this._solveDistanceThreshold = solveDistance;
     }
 
+    /**
+     * Решает задачу ИК с помощью алгоритма FABRIK.
+     * <p>
+     * Если в цепи еще нет костей - возникнет ошибка.
+     *
+     * @param target    Целевое местоположение.
+     * @return            Наименьшее расстояние между новым положением эффектора и целевым местоположением, которого удалось достичь.
+     */
     private solveIK(target: Vec2f): number {
         // ---------- Прямой проход от эффектора к основанию  -----------
 
@@ -450,6 +552,11 @@ export class FabrikChain2D {
         return Vec2f.distanceBetween(currentEffectorLocation, target);
     }
 
+    /**
+     * Устанавливает должна ли использоваться встроенная целевая позиция.
+     *
+     * @param    value
+     */
     setEmbeddedTargetMode(value: boolean): void { this._useEmbeddedTarget = value; }
 
     private cloneChainVector(): FabrikBone2D[] {
@@ -481,6 +588,13 @@ export class FabrikChain2D {
         }
     }
 
+    /**
+     * Решает задачу ИК с помощью алгоритма FABRIK для внутреннего положения.
+     * <p>
+     * Если в цепи еще нет костей - возникнет ошибка.
+     *
+     * @return            Наименьшее расстояние между новым положением эффектора и целевым местоположением, которого удалось достичь.
+     */
     solveForEmbeddedTarget(): number {
         if (this._useEmbeddedTarget) {
             return this.solveForTarget(this._embeddedTarget);
@@ -489,6 +603,14 @@ export class FabrikChain2D {
         }
     }
 
+    /**
+     * Решает задачу ИК с помощью алгоритма FABRIK.
+     * <p>
+     * Если в цепи еще нет костей - возникнет ошибка.
+     *
+     * @param newTarget    Целевое местоположение.
+     * @return            Наименьшее расстояние между новым положением эффектора и целевым местоположением, которого удалось достичь.
+     */
     solveForTarget(newTarget: Vec2f): number {
         if (this._lastTargetLocation.approximatelyEquals(newTarget, 0.001) && this._lastBaseLocation.approximatelyEquals(this._baseLocation, 0.001)) {
             return this._currentSolveDistance;

@@ -48,7 +48,6 @@ export class FabrikJoint3D {
      * Допустимые значения  [0..180].
      *
      * @default 180.0
-     * @see mHingeAxis
      */
     private _hingeClockwiseConstraintDegs: number = FabrikJoint3D.MAX_CONSTRAINT_ANGLE_DEGS;
 
@@ -59,7 +58,6 @@ export class FabrikJoint3D {
      * Допустимые значения  [0..180].
      *
      * @default 180.0
-     * @see mHingeAxis
      */
     private _hingeAnticlockwiseConstraintDegs: number = FabrikJoint3D.MAX_CONSTRAINT_ANGLE_DEGS;
 
@@ -88,8 +86,8 @@ export class FabrikJoint3D {
      * Без параметров.
      * Все поля получают занчения по умолчанию.
      * Задать недефолтные значения можно через методы
-     * {@link #setAsGlobalHinge(Vec3f, number, number, Vec3f)} и
-     * {@link #setAsLocalHinge(Vec3f, number, number, Vec3f)} methods.
+     * setAsGlobalHinge(Vec3f, number, number, Vec3f) и
+     * setAsLocalHinge(Vec3f, number, number, Vec3f).
      * <p>
      * Конструктор копирования.
      * Создаёт глубокую копию сустава.
