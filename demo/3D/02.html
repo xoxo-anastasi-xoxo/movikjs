@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02</title>
+    <script src="../../build/movik.js"></script>
+    <style>
+        html,body{margin:0; padding:0; width:100%; height:100%;}
+        body{background-color:#404040;}
+
+        canvas{border:1px solid black; position:relative; }
+        div{display:flex; width:100%; height:100%; align-items:center; justify-content:center;}
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="scene"></canvas>
+</div>
+<script>
+    const {Vec3f, FabrikBone3D, Utils, FabrikChain3D} = MovikJS;
+
+    const defaultStartLocation = new Vec3f(0, 0, 0);
+    const defaultBoneLength      = 0.4;
+    let boneColour = Utils.BLUE;
+
+    const lap1 = new FabrikChain3D();
+
+    lap1.addBone(
+        new FabrikBone3D(
+            defaultStartLocation,
+            Vec3f.rotateYDegs(Vec3f.Y_AXIS, 0),
+            defaultBoneLength,
+            boneColour
+        )
+    );
+
+    lap1.addConsecutiveBone(Vec3f.rotateYDegs(Vec3f.Y_AXIS, 0), defaultBoneLength, boneColour);
+    lap1.setFixedBaseMode(false);
+
+</script>
+<script>
+    const st = new MovikJS.FabrikStructure3D();
+    st.addChain(lap1);
+</script>
+<script>
+    const {Scene} = MovikJS;
+    const scene = new Scene('scene');
+    scene.init(true);
+
+    const primitive = scene.addPrimitive(st);
+    const point = scene.addPoint(new Vec3f(0,0,0), Utils.MAGENTA);
+    const x0 = 0;
+    const x1 = 1;
+    const y0 = 0.8;
+    const y1 = 1;
+    const z0 = 0;
+    const z1 = 0;
+
+
+    let count = 0;
+
+    const defaultUV  = new Vec3f(1, 1, 0);
+    const numBones   = 360;
+    const rotStep    = 360.0 / numBones;
+
+    setInterval(() => {
+        if (count < numBones) {
+            const alpha = count/numBones;
+            point.moveTo(new Vec3f(
+                x0*(1 - alpha) + x1 * alpha,
+                y0*(1 - alpha) + y1 * alpha,
+                z0*(1 - alpha) + z1 * alpha,
+            ));
+            primitive.moveTo(0,new Vec3f(
+                x0*(1 - alpha) + x1 * alpha,
+                y0*(1 - alpha) + y1 * alpha,
+                z0*(1 - alpha) + z1 * alpha,
+            ));
+        } else {
+            point.moveTo(Vec3f.rotateYDegs(defaultUV, count % numBones * rotStep));
+            primitive.moveTo(0,Vec3f.rotateYDegs(defaultUV, count % numBones * rotStep));
+        }
+        count++;
+        }, 50);
+
+</script>
+</body>
+</html>

@@ -58,7 +58,7 @@ export class FabrikStructure2D {
 
             const constraintType = thisChain.getBaseboneConstraintType();
 
-            if (hostChainNumber !== -1 && constraintType !== BaseboneConstraintType2D.GLOBAL_ABSOLUTE) {
+            if (hostChainNumber !== -1) {
                 const hostBone = this._chains[hostChainNumber].getBone(this._chains[loop].getConnectedBoneNumber());
 
                 if (thisChain.getBoneConnectionPoint() == BoneConnectionPoint.START) {

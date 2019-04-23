@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Змейка 2D</title>
+    <script src="../build/movik.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<canvas is="my-scene" id="scene"> </canvas>
+
+<canvas id="scene"></canvas>
+<script>
+    const {Scene, Vec3f, Utils} = MovikJS;
+    const scene = new Scene('scene', 2);
+    scene.init(true);
+    const point = scene.addPoint(new Vec3f(0,0,0), Utils.MAGENTA);
+</script>
+
+</body>
+</html>

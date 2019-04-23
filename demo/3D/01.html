@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01</title>
+    <script src="../../build/movik.js"></script>
+    <style>
+        html,body{margin:0; padding:0; width:100%; height:100%;}
+        body{background-color:#404040;}
+
+        canvas{border:1px solid black; position:relative; }
+        div{display:flex; width:100%; height:100%; align-items:center; justify-content:center;}
+    </style>
+</head>
+<body>
+<div>
+    <canvas id="scene"></canvas>
+</div>
+<script>
+    const {Vec3f, FabrikBone3D, Utils, FabrikChain3D} = MovikJS;
+
+    const defaultStartLocation = new Vec3f(0, 0, 0);
+    const defaultBoneLength      = 0.4;
+    let boneColour = Utils.BLUE;
+
+    const chain = new FabrikChain3D();
+
+    chain.addBone(
+        new FabrikBone3D(
+            defaultStartLocation,
+            Vec3f.rotateYDegs(Vec3f.Y_AXIS, 0),
+            defaultBoneLength,
+            boneColour
+        )
+    );
+
+    chain.addConsecutiveBone(Vec3f.rotateYDegs(Vec3f.Y_AXIS, 0), defaultBoneLength, boneColour);
+
+</script>
+<script>
+    const st = new MovikJS.FabrikStructure3D();
+    st.addChain(chain);
+</script>
+<script>
+    const {Scene} = MovikJS;
+    const scene = new Scene('scene');
+    scene.init(true);
+
+    const primitive = scene.addPrimitive(st);
+    const point = scene.addPoint(new Vec3f(0,0,0), Utils.MAGENTA);
+
+    let count = 0;
+
+    const defaultUV  = new Vec3f(1, 1, 0);
+    const numBones   = 360;
+    const rotStep    = 360.0 / numBones;
+
+    setInterval(() => {
+        point.moveTo(Vec3f.rotateYDegs(defaultUV, count % numBones * rotStep));
+        primitive.moveTo(0,Vec3f.rotateYDegs(defaultUV, count % numBones * rotStep));
+        // primitive.moveTo(count % 8, count % 16 < 8 ? new Vec3f(0, 0, 0) : laps[count % 8]);
+        count++;
+        }, 50);
+
+</script>
+</body>
+</html>

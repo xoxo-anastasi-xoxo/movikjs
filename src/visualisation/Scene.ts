@@ -160,7 +160,9 @@ export class Scene {
     }
 
     addPoint(vec, color) {
-        this._points.push(new Point(this.gl, this.gCamera, vec, color));
+        const point = new Point(this.gl, this.gCamera, vec, color);
+        this._points.push(point);
+        return point;
     }
 }
 
@@ -170,10 +172,18 @@ export class Scene {
 class Point {
     gModal;
     gShader;
+    color;
+    gl;
 
     constructor(gl, camera, vec, color) {
         this.gShader = new Primitive2DShader(gl, camera.projectionMatrix);
+        this.color = color.toArray();
+        this.gl = gl;
         this.gModal = Primatives.Point.createModal(gl, 'point', vec.toArray(), color.toArray());
+    }
+
+    moveTo(vec) {
+        this.gModal = Primatives.Point.createModal(this.gl, 'point', vec.toArray(), this.color);
     }
 }
 

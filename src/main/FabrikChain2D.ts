@@ -612,9 +612,15 @@ export class FabrikChain2D {
      * @return            Наименьшее расстояние между новым положением эффектора и целевым местоположением, которого удалось достичь.
      */
     solveForTarget(newTarget: Vec2f): number {
-        if (this._lastTargetLocation.approximatelyEquals(newTarget, 0.001) && this._lastBaseLocation.approximatelyEquals(this._baseLocation, 0.001)) {
+        if (this._lastTargetLocation.approximatelyEquals(newTarget, 0.00001) &&
+            (!this._fixedBaseMode && this._lastBaseLocation.approximatelyEquals(this.getBaseLocation(), 0.00001)) &&
+            (this._fixedBaseMode && this._baseLocation.approximatelyEquals(this.getBaseLocation(), 0.00001))
+        ) {
             return this._currentSolveDistance;
         }
+        // if (this._lastTargetLocation.approximatelyEquals(newTarget, 0.001) && this._lastBaseLocation.approximatelyEquals(this._baseLocation, 0.001)) {
+        //     return this._currentSolveDistance;
+        // }
 
         let startingDistance;
         let startingSolution = null;
